@@ -1,15 +1,15 @@
 import java.util.Scanner;
 
-public class Admin {
+public class Customer {
     // Variables
     Scanner scanner = new Scanner(System.in);
     private String username = null;
     private String password = null;
 
-    private static final String nama = "Elian";
+    private static final String nama = "Lucy";
 
     // Constructor
-    public Admin(String username, String password) {
+    public Customer(String username, String password) {
         System.out.printf("Selamat Datang, %s.", nama);
         this.username = username;
         this.password = password;
@@ -21,10 +21,10 @@ public class Admin {
         int pilihanMenu = 0;
         while (pilihanMenu != 4){
             System.out.println();
-            System.out.println("MENU ADMIN");
+            System.out.println("MENU CUSTOMER");
             System.out.println("1. Lihat Restoran");
-            System.out.println("2. Tambah Restoran");
-            System.out.println("3. Hapus Restoran");
+            System.out.println("2. Buat Pesanan");
+            System.out.println("3. Lihat Pesanan");
             System.out.println("4. Kembali ke menu log in");
             pilihanMenu = scanner.nextInt();
 
@@ -33,10 +33,10 @@ public class Admin {
                 // lihatResto();
             } else if(pilihanMenu == 2) {
                 System.out.println();
-                // tambahResto();
+                // buatPesanan();
             } else if(pilihanMenu == 3) {
                 System.out.println();
-                // hapusResto();
+                // lihatPesanan();
             } else if (pilihanMenu == 4) {
                 System.out.println();
             } else {
