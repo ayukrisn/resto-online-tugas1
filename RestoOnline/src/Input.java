@@ -122,4 +122,11 @@ public class Input {
 
         return inputPayment;
     }
+
+    /**
+     * Pause
+     */
+    public void pause() {
+        input.next();
+    }
 }
