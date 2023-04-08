@@ -19,4 +19,6 @@ public abstract class User {
     }
     // Methods
     public abstract boolean logIn();
+
+    public abstract void showMenu();
 }

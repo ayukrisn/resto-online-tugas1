@@ -1,15 +1,16 @@
 import java.util.Scanner;
 
-public class Admin extends User {
+public class Customer extends User {
     // Variables
-    private boolean isAdmin = false;
+    private boolean isCustomer = false;
+
     Scanner keyboard = new Scanner(System.in);
 
-    // Constructor
-    public Admin() {
+    public Customer() {
         super();
     }
-    public Admin(String theUsername, String thePassword, String theNama) {
+
+    public Customer(String theUsername, String thePassword, String theNama) {
         super(theUsername, thePassword, theNama);
     }
 
@@ -19,7 +20,7 @@ public class Admin extends User {
         String inputPassword;
         boolean hasLoggedIn = false;
 
-        Messages.loginInstruction("ADMINISTRATOR");
+        Messages.loginInstruction("CUSTOMER");
         System.out.print("  Username: ");
         inputUsername = keyboard.next();
         System.out.print("  Password: ");
@@ -31,28 +32,27 @@ public class Admin extends User {
             hasLoggedIn = false;
         }
         return hasLoggedIn;
-     }
-
+    }
 
     public void showMenu() {
         System.out.println(" + =============================================================== + ");
         System.out.println("||                         T A P  AND  E A T                       ||");
-        System.out.println("||                            Admin Menu                           ||");
+        System.out.println("||                           Customer Menu                         ||");
         System.out.println(" + --------------------------------------------------------------- + ");
         System.out.println("||                 Pilih opsi dengan memasukkan angka              ||");
         System.out.println("||                                                                 ||");
         System.out.println("||   [1] Lihat Restoran yang Ada                                   ||");
-        System.out.println("||   [2] Tambahkan Restoran Baru                                   ||");
-        System.out.println("||   [3] Hapus Restoran yang Ada                                   ||");
+        System.out.println("||   [2] Buat Pesanan Baru                                         ||");
+        System.out.println("||   [3] Lihat Riwayat Pemesanan                                   ||");
         System.out.println("||   [0] Kembali ke menu log in                                    ||");
         System.out.println(" + =============================================================== + ");
     }
 
-    public boolean getIsAdmin() {
-        return isAdmin;
+    public boolean getIsCustomer() {
+        return isCustomer;
     }
 
-    public void setIsAdmin(boolean admin) {
-        isAdmin = admin;
+    public void setIsCustomer(boolean customer) {
+        isCustomer = customer;
     }
 }

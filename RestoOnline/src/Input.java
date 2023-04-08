@@ -37,8 +37,9 @@ public class Input {
                     inputInteger = input.nextInt();
                     break;
                 } catch (InputMismatchException e) {
-                    System.out.println("Mohon masukkan angka yang benar.");
+                    System.out.println("    Mohon masukkan angka yang benar.");
                     input.next();
+                    Messages.inputInstruction();
                 }
 
             }
@@ -60,7 +61,8 @@ public class Input {
             inputMenuChoice = validationInteger();
 
             if (inputMenuChoice < range1 || inputMenuChoice > range2) {
-                System.out.println("Mohon masukkan pilihan sesuai menu yang disediakan.");
+                System.out.println("    Mohon masukkan pilihan sesuai menu yang disediakan.");
+                Messages.inputInstruction();
             } else {
                 inputValid = true;
                 // System.out.println("Input benar.");
@@ -96,8 +98,9 @@ public class Input {
                 inputDouble = input.nextDouble();
                 break;
             } catch (InputMismatchException e) {
-                System.out.println("Mohon masukkan nominal yang benar.");
+                System.out.println("    Mohon masukkan nominal yang benar.");
                 input.next();
+                Messages.inputInstruction();
             }
         }
         return inputDouble;
@@ -114,10 +117,12 @@ public class Input {
         while (!inputValid) {
             inputPayment = validationDouble();
 
-            if (inputPayment < 0)
-                System.out.println("Mohon masukkan nominal yang benar.");
-            else
+            if (inputPayment < 0) {
+                System.out.println("    Mohon masukkan nominal yang benar.");
+                Messages.inputInstruction();
+            } else {
                 inputValid = true;
+            }
         }
 
         return inputPayment;
@@ -127,6 +132,6 @@ public class Input {
      * Pause
      */
     public void pause() {
-        input.next();
+        input.nextLine();
     }
 }

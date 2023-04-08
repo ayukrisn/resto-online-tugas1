@@ -1,3 +1,7 @@
+/**
+ * MESSAGES: untuk pesan yang ada di program (di luar kelas yang ada)
+ */
+
 public class Messages {
     /**
      * MESSAGES UNTUK KEPERLUAN LOG IN
