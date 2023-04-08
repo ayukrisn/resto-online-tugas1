@@ -71,8 +71,18 @@ public class Input {
     }
 
     /**
-     * Memeriksa apakah User memberikan input
+     * Memeriksa apakah User memberikan input untuk menghapus pilihan
      */
+    public boolean isDelete(int inputMenuChoice) {
+        return inputMenuChoice == INPUT_HAPUS;
+    }
+
+    /**
+     * Memeriksa apakah User memberikan input untuk selesai memesan
+     */
+    public boolean isDoneOrder(int inputMenuChoice) {
+        return inputMenuChoice == INPUT_SELESAI;
+    }
 
 
     /**
