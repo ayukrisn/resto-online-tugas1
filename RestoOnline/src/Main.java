@@ -4,12 +4,26 @@
 
 public class Main {
     /**
-     Inisiasi objek Admin, Customer, dll
+     * Inisiasi objek untuk Admin, Customer, Input
      */
-    private static Admin admin = new Admin("administrator1", "adminpass", "Ayu Krisna");
-    private static Customer customer = new Customer("customer1", "customerpass", "Winson Tan");
+    private static Admin admin = new Admin();
+    private static Customer customer = new Customer();
     private static Input keyboard = new Input();
     private static int userInput;
+
+    /**
+     * Username dan password
+     */
+    private static String adminUsername = "administrator1";
+    private static String adminPassword = "adminpass";
+    private static String adminName = "Ayu Krisna";
+    private static String customerUsername = "customer1";
+    private static String customerPassword = "customerpass";
+    private static String customerName = "Winson Tan";
+
+    /**
+     * Main methods
+     */
     public static void main(String[] args) {
 
         boolean runProgram = true;
@@ -38,7 +52,7 @@ public class Main {
             userInput = keyboard.getMenuChoice(0,2);
             switch (userInput) {
                 case 1:
-                    if(admin.logIn()) {
+                    if(admin.logIn(adminUsername, adminPassword, adminName)) {
                         Messages.loggedInGreeting(admin.nama);
                         hasLoggedIn = true;
                         admin.setIsAdmin(true);
@@ -49,7 +63,7 @@ public class Main {
                     }
                     break;
                 case 2:
-                    if(customer.logIn()) {
+                    if(customer.logIn(customerUsername, customerPassword, customerName)) {
                         Messages.loggedInGreeting(customer.nama);
                         hasLoggedIn = true;
                         customer.setIsCustomer(true);

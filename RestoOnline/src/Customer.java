@@ -15,7 +15,7 @@ public class Customer extends User {
     }
 
     // Methods
-    public boolean logIn() {
+    public boolean logIn(String username, String password, String nama) {
         String inputUsername;
         String inputPassword;
         boolean hasLoggedIn = false;
@@ -27,6 +27,9 @@ public class Customer extends User {
         inputPassword = keyboard.next();
 
         if (username.equals(inputUsername) && password.equals(inputPassword)) {
+            this.username = inputUsername;
+            this.password = inputPassword;
+            this.nama = nama;
             hasLoggedIn = true;
         } else {
             hasLoggedIn = false;

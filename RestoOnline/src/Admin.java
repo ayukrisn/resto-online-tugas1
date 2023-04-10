@@ -14,7 +14,7 @@ public class Admin extends User {
     }
 
     // Methods
-    public boolean logIn() {
+    public boolean logIn(String username, String password, String nama) {
         String inputUsername;
         String inputPassword;
         boolean hasLoggedIn = false;
@@ -26,6 +26,9 @@ public class Admin extends User {
         inputPassword = keyboard.next();
 
         if (username.equals(inputUsername) && password.equals(inputPassword)) {
+            this.username = inputUsername;
+            this.password = inputPassword;
+            this.nama = nama;
             hasLoggedIn = true;
         } else {
             hasLoggedIn = false;
@@ -42,7 +45,7 @@ public class Admin extends User {
         System.out.println("||                 Pilih opsi dengan memasukkan angka              ||");
         System.out.println("||                                                                 ||");
         System.out.println("||   [1] Lihat Restoran yang Ada                                   ||");
-        System.out.println("||   [2] Tambahkan Restoran Baru                                   ||");
+        System.out.println("||   [2] Tambahkan Restoran baru                                   ||");
         System.out.println("||   [3] Hapus Restoran yang Ada                                   ||");
         System.out.println("||   [0] Kembali ke menu log in                                    ||");
         System.out.println(" + =============================================================== + ");

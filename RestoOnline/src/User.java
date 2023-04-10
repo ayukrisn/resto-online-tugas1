@@ -18,7 +18,7 @@ public abstract class User {
         this.nama = nama;
     }
     // Methods
-    public abstract boolean logIn();
+    public abstract boolean logIn(String username, String password, String nama);
 
     public abstract void showMenu();
 }
