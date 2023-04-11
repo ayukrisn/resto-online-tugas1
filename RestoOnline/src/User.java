@@ -20,5 +20,4 @@ public abstract class User {
     // Methods
     public abstract boolean logIn(String username, String password, String nama);
 
-    public abstract void showMenu();
 }

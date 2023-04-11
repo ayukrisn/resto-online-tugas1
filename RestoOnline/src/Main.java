@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 /**
     Program Pemenasan Makanan Online Sederhana
  */
@@ -9,6 +11,8 @@ public class Main {
     private static Admin admin = new Admin();
     private static Customer customer = new Customer();
     private static Input keyboard = new Input();
+
+    private static ArrayList<Restaurant> listRestoran= new ArrayList<Restaurant>();
     private static int userInput;
 
     /**
@@ -25,16 +29,21 @@ public class Main {
      * Main methods
      */
     public static void main(String[] args) {
+        /**
+         * Inisiasi data restoran untuk testing
+         */
+        listRestoran.add(new Restaurant("RESTO1", "Warung Ikan Bakar", "Jimbaran"));
+        listRestoran.add(new Restaurant("RESTO2", "Resto Siliwangi", "Denpasar"));
 
         boolean runProgram = true;
         while (runProgram) {
             login();
             if (admin.getIsAdmin()) {
-                admin.showMenu();
+                admin.adminAccess(listRestoran);
             } else if (customer.getIsCustomer()) {
                 customer.showMenu();
             } else {
-                System.out.println("Ada masalah pada program");
+                System.out.println("Ada masalah pada program menu 11");
                 System.exit(0);
             }
         }

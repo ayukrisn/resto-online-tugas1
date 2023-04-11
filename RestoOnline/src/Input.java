@@ -134,4 +134,11 @@ public class Input {
     public void pause() {
         input.nextLine();
     }
+
+    /**
+     * String
+     */
+    public void String() {
+        input.nextLine();
+    }
 }
