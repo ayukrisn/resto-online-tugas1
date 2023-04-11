@@ -36,19 +36,8 @@ public class Admin extends User {
         return hasLoggedIn;
      }
 
-
     public void showMenu() {
-        System.out.println(" + =============================================================== + ");
-        System.out.println("||                         T A P  AND  E A T                       ||");
-        System.out.println("||                            Admin Menu                           ||");
-        System.out.println(" + --------------------------------------------------------------- + ");
-        System.out.println("||                 Pilih opsi dengan memasukkan angka              ||");
-        System.out.println("||                                                                 ||");
-        System.out.println("||   [1] Lihat Restoran yang Ada                                   ||");
-        System.out.println("||   [2] Tambahkan Restoran baru                                   ||");
-        System.out.println("||   [3] Hapus Restoran yang Ada                                   ||");
-        System.out.println("||   [0] Kembali ke menu log in                                    ||");
-        System.out.println(" + =============================================================== + ");
+
     }
 
     public boolean getIsAdmin() {
@@ -57,5 +46,22 @@ public class Admin extends User {
 
     public void setIsAdmin(boolean admin) {
         isAdmin = admin;
+    }
+
+    // Nested Class for Messages Guide
+    static class AdminMessages {
+        public void showMenu() {
+            System.out.println(" + =============================================================== + ");
+            System.out.println("||                         T A P  AND  E A T                       ||");
+            System.out.println("||                            Admin Menu                           ||");
+            System.out.println(" + --------------------------------------------------------------- + ");
+            System.out.println("||                 Pilih opsi dengan memasukkan angka              ||");
+            System.out.println("||                                                                 ||");
+            System.out.println("||   [1] Lihat Restoran yang Ada                                   ||");
+            System.out.println("||   [2] Tambahkan Restoran baru                                   ||");
+            System.out.println("||   [3] Hapus Restoran yang Ada                                   ||");
+            System.out.println("||   [0] Kembali ke menu log in                                    ||");
+            System.out.println(" + =============================================================== + ");
+        }
     }
 }
