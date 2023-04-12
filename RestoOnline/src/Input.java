@@ -138,7 +138,11 @@ public class Input {
     /**
      * String
      */
-    public void String() {
-        input.nextLine();
+    public String nextLine() {
+        return input.nextLine();
+    }
+
+    public String next() {
+        return input.next();
     }
 }

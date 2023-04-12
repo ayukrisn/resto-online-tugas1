@@ -33,7 +33,18 @@ public class Main {
          * Inisiasi data restoran untuk testing
          */
         listRestoran.add(new Restaurant("RESTO1", "Warung Ikan Bakar", "Jimbaran"));
+        Restaurant restoranTest1 = listRestoran.get(0);
+        restoranTest1.getListMakanan().add(new Dish("MAKAN1", "Ikan Gurame Bakar", 40000));
+        restoranTest1.getListMakanan().add(new Dish("MAKAN2", "Ikan Tongkol Bakar", 30000));
+        restoranTest1.getListMakanan().add(new Dish("MAKAN3", "Nasi Putih", 4000));
+        restoranTest1.getListMakanan().add(new Dish("MAKAN1", "Ikan Gurame Bakar", 40000));
+        restoranTest1.getListMinuman().add(new Dish("MINUM1", "Es Teh Manis", 5000));
+        restoranTest1.getListMinuman().add(new Dish("MINUM2", "Es Jeruk Manis", 8000));
         listRestoran.add(new Restaurant("RESTO2", "Resto Siliwangi", "Denpasar"));
+        Restaurant restoranTest2 = listRestoran.get(1);
+        restoranTest2.getListMakanan().add(new Dish("MAKAN1", "Nasi Goreng", 20000));
+        restoranTest2.getListMakanan().add(new Dish("MAKAN2", "Capcay", 12000));
+        restoranTest2.getListMinuman().add(new Dish("MINUM1", "Es Gula", 3000));
 
         boolean runProgram = true;
         while (runProgram) {

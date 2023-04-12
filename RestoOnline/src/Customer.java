@@ -4,7 +4,7 @@ public class Customer extends User {
     // Variables
     private boolean isCustomer = false;
 
-    Scanner keyboard = new Scanner(System.in);
+    private Input keyboard = new Input();
 
     public Customer() {
         super();
@@ -22,9 +22,9 @@ public class Customer extends User {
 
         Messages.loginInstruction("CUSTOMER");
         System.out.print("  Username: ");
-        inputUsername = keyboard.next();
+        inputUsername = keyboard.nextLine();
         System.out.print("  Password: ");
-        inputPassword = keyboard.next();
+        inputPassword = keyboard.nextLine();
 
         if (username.equals(inputUsername) && password.equals(inputPassword)) {
             this.username = inputUsername;

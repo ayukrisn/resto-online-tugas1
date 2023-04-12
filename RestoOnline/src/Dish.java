@@ -26,6 +26,12 @@ public class Dish {
         return true;
     }
 
+    // Methods
+    public String toString() {
+        System.out.printf("|| %-9s| %-37s| Rp%-12.2f||\n", getIdDish(), getNama(), getHarga());
+        return null;
+    }
+
     // Methods Getter and Setter
     public String getNama() {
         return nama;
