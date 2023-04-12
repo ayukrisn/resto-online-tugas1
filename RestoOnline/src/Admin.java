@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 public class Admin extends User {
     // Variables
-    private boolean isAdmin = false;
+    private boolean isAdmin = false; //apakah Admin sudah log in atau belum
     private Input keyboard = new Input();
 
     // Constructor
@@ -15,6 +15,14 @@ public class Admin extends User {
     }
 
     // Methods
+
+    /**
+     * Method logIn() : untuk melakukan log in pada Admin
+     * @param username
+     * @param password
+     * @param nama
+     * @return true kalau username dan password benar, false kalau salah
+     */
     public boolean logIn(String username, String password, String nama) {
         String inputUsername;
         String inputPassword;
@@ -37,10 +45,15 @@ public class Admin extends User {
         return hasLoggedIn;
      }
 
+    /**
+     * Method adminAccess() : berisi segala akses yang diberikan kepada Admin
+     * @param listRestaurant
+     */
     public void adminAccess(ArrayList<Restaurant> listRestaurant) {
         boolean runAdminAccess = true;
         while(runAdminAccess) {
             AdminMessages.showMenu(); //1. lihat, 2. tambah, 3. hapus, 0. kembali ke menu
+            Messages.inputInstruction();
             int userInput = keyboard.getMenuChoice(0,3);
 
             if (userInput == 1) { // Lihat Restoran
@@ -55,6 +68,7 @@ public class Admin extends User {
                         index++;
                     }
                     AdminMessages.lihatRestoranFooter(); // pilih resto dengan ID atau kembali dengan 0
+                    Messages.inputInstruction();
                     String userInputResto = keyboard.nextLine();
                     if (userInputResto.equals("0")) break;
                     else {
@@ -74,11 +88,35 @@ public class Admin extends User {
                         }
                     }
                 }
-            } else if (userInput == 2) {
+            } else if (userInput == 2) { //Tambah Restoran
+                boolean runAddRestaurant = true;
+                int userInputAddRestaurant;
+                // Variabel untuk restoran
+                String tempIdRestoran = null;
+                String tempNamaRestoran = null;
+                String tempAlamatRestoran = null;
 
-            } else if (userInput == 3) {
+                while (runAddRestaurant) {
+                    AdminMessages.tambahRestoranHeader();
+                    System.out.print("   ID Restoran: ");
+                    tempIdRestoran = keyboard.validateID();
+                    System.out.print("   Nama Restoran: ");
+                    tempNamaRestoran = keyboard.validateString("Nama restoran", 30);
+                    System.out.print("   Alamat Restoran: ");
+                    tempAlamatRestoran = keyboard.validateString("Alamat restoran", 21);
+                    listRestaurant.add(new Restaurant(tempIdRestoran, tempNamaRestoran, tempAlamatRestoran));
 
-            } else if (userInput == 0) {
+                    Restaurant restaurant = listRestaurant.get(listRestaurant.size()-1);
+                    restaurant.addMenu();
+                    AdminMessages.tambahRestoranLagi();
+                    Messages.inputInstruction();
+                    userInputAddRestaurant = keyboard.getMenuChoice(1,2);
+                    if (userInputAddRestaurant == 2) break;
+                }
+
+            } else if (userInput == 3) { //Hapus Restoran
+
+            } else if (userInput == 0) { //Kembali ke menu login
                 break;
             } else {
                 System.out.println("Ada masalah pada program");
@@ -131,12 +169,18 @@ public class Admin extends User {
             System.out.println("||                          TAMBAH RESTORAN                        ||");
             System.out.println("||                            Admin Menu                           ||");
             System.out.println(" + --------------------------------------------------------------- + ");
-            System.out.println("||                 Pilih opsi dengan memasukkan angka              ||");
+            System.out.println("||  Mohon masukkan restoran baru dengan informasi sebagai berikut. ||");
+            System.out.println("||        < ID Restoran, Nama Restoran, Alamat Restoran >          ||");
+            System.out.println(" + =============================================================== + ");
+        }
+
+        public static void tambahRestoranLagi() {
+            System.out.println(" + --------------------------------------------------------------- + ");
+            System.out.println("||                   Restoran berhasil ditambahkan!                ||");
+            System.out.println(" + --------------------------------------------------------------- + ");
+            System.out.println("||                  Lanjutkan menambahkan restoran?                ||");
             System.out.println("||                                                                 ||");
-            System.out.println("||   [1] Lihat Restoran yang Ada                                   ||");
-            System.out.println("||   [2] Tambahkan Restoran baru                                   ||");
-            System.out.println("||   [3] Hapus Restoran yang Ada                                   ||");
-            System.out.println("||   [0] Kembali ke menu log in                                    ||");
+            System.out.println("||                 [1] Ya                   [2] Tidak              ||");
             System.out.println(" + =============================================================== + ");
         }
     }

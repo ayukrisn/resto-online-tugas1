@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class Main {
     /**
-     * Inisiasi objek untuk Admin, Customer, Input
+     * Inisiasi objek untuk Admin, Customer, Restaurant List, dan object Input
      */
     private static Admin admin = new Admin();
     private static Customer customer = new Customer();
@@ -16,7 +16,7 @@ public class Main {
     private static int userInput;
 
     /**
-     * Username dan password
+     * Username dan password untuk admin dan customer
      */
     private static String adminUsername = "administrator1";
     private static String adminPassword = "adminpass";
@@ -46,6 +46,9 @@ public class Main {
         restoranTest2.getListMakanan().add(new Dish("MAKAN2", "Capcay", 12000));
         restoranTest2.getListMinuman().add(new Dish("MINUM1", "Es Gula", 3000));
 
+        /**
+         * Kode utama untuk melakukan run pada program
+         */
         boolean runProgram = true;
         while (runProgram) {
             login();
@@ -61,6 +64,9 @@ public class Main {
 
     }
 
+    /**
+     * Method login() : untuk melakukan sesi login
+     */
     public static void login() {
         boolean hasLoggedIn = false;
         admin.setIsAdmin(false);
@@ -99,6 +105,9 @@ public class Main {
         }
     }
 
+    /**
+     * Method exitConfirmation() : konfirmasi keluar/tidak dari program
+     */
     public static void exitConfirmation() {
         Messages.exitConfirmation();
         Messages.inputInstruction();

@@ -110,7 +110,7 @@ public class Input {
     * Digunakan untuk mendapatkan dan memvalidasi input pembayaran
      * dari customer
     */
-    public double getPayment() {
+    public double getHarga() {
         double inputPayment = 0;
         boolean inputValid = false;
 
@@ -126,6 +126,58 @@ public class Input {
         }
 
         return inputPayment;
+    }
+
+    /**
+     * Digunakan untuk validasi input pada saat menambahkan ID
+     */
+    public String validateID() {
+        boolean inputValid = false;
+        String id = null;
+        while (!inputValid) {
+            id = input.nextLine();
+            if (id.isBlank()) {
+                System.out.println("    ID tidak boleh kosong");
+            } else if (id.length() > 9) {
+                System.out.println("    Maksimal panjang ID adalah 9 huruf.");
+            } if (id.contains(" ")){
+                System.out.println("    ID tidak boleh berisi whitespace.");
+            } else {
+                id = id.toUpperCase();
+                inputValid = true;
+            }
+
+            if (!inputValid) {
+                System.out.println("    Mohon masukkan ID yang benar.");
+                System.out.print("    ID:");
+            }
+        }
+        return id;
+    }
+
+    /**
+     * Digunakan untuk validasi input pada saat menambahkan nama atau alamat
+     * Nama restoran: length <= 30, nama dish: length <= 37, alamat: <= 21
+     */
+    public String validateString(String variable, int limit) {
+        boolean inputValid = false;
+        String string = null;
+        while (!inputValid) {
+            string = input.nextLine();
+            if (string.isBlank()) {
+                System.out.printf("    %s tidak boleh kosong\n", variable);
+            } else if (string.length() > limit) {
+                System.out.printf("    Maksimal panjang %s adalah %d huruf.", variable, limit);
+            } else {
+                inputValid = true;
+            }
+
+            if (!inputValid) {
+                System.out.printf("    Mohon masukkan %s yang benar.", variable);
+                System.out.printf("    %s:", variable);
+            }
+        }
+        return string;
     }
 
     /**
