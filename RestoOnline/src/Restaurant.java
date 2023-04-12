@@ -122,7 +122,7 @@ public class Restaurant {
         public static void pilihMenu(String namaResto) {
             System.out.println(" + =============================================================== + ");
             System.out.println("||                            Selamat Datang!                      ||");
-            System.out.printf ("|| Restoran: %-54s||\n", namaResto);
+            System.out.printf ("|| > Restoran: %-52s||\n", namaResto);
             System.out.println(" + --------------------------------------------------------------- + ");
             System.out.println("||                  Yuk, pilih makanan dan minumanmu               ||");
             System.out.println("||                                                                 ||");
@@ -134,7 +134,7 @@ public class Restaurant {
         public static void lihatMakananHeader(String namaResto) {
             System.out.println(" + =============================================================== + ");
             System.out.println("||                        LIHAT MENU RESTORAN                      ||");
-            System.out.printf ("|| Restoran: %-54s||\n", namaResto);
+            System.out.printf ("|| > Restoran: %-52s||\n", namaResto);
             System.out.println(" + --------------------------------------------------------------- + ");
             System.out.println("|| ID MENU  |             NAMA MAKANAN             |      HARGA    ||");
             System.out.println(" + --------------------------------------------------------------- + ");
@@ -148,7 +148,7 @@ public class Restaurant {
         public static void lihatMinumanHeader(String namaResto) {
             System.out.println(" + =============================================================== + ");
             System.out.println("||                        LIHAT MENU RESTORAN                      ||");
-            System.out.printf ("|| Restoran: %-54s||\n", namaResto);
+            System.out.printf ("|| > Restoran: %-52s||\n", namaResto);
             System.out.println(" + --------------------------------------------------------------- + ");
             System.out.println("|| ID MENU  |             NAMA MINUMAN             |      HARGA    ||");
             System.out.println(" + --------------------------------------------------------------- + ");

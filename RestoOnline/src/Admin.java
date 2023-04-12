@@ -61,19 +61,19 @@ public class Admin extends User {
                         index = 0;
                         for (Restaurant element : listRestaurant) {
                             Restaurant restaurantObject = listRestaurant.get(index);
-                            if(restaurantObject.getIdResto().equals(userInputResto)) {
+                            if (restaurantObject.getIdResto().equals(userInputResto.toUpperCase())) {
                                 restaurantFound = true;
                                 restaurantObject.seeRestaurantMenu();
                                 break;
                             } else index++;
-                        } if (!restaurantFound) {
+                        }
+                        if (!restaurantFound) {
                             System.out.println("    Maaf, ID Restoran yang Anda masukkan salah, nih.");
                             System.out.println("    Tekan ENTER untuk kembali.");
                             keyboard.nextLine();
                         }
                     }
                 }
-                // masih perlu ditambahin lagi
             } else if (userInput == 2) {
 
             } else if (userInput == 3) {
@@ -123,6 +123,20 @@ public class Admin extends User {
             System.out.println(" + --------------------------------------------------------------- + ");
             System.out.println("||          Lihat menu restoran dengan memasukkan ID restoran      ||");
             System.out.println("||                 Klik [0] untuk kembali ke menu admin            ||");
+            System.out.println(" + =============================================================== + ");
+        }
+
+        public static void tambahRestoranHeader() {
+            System.out.println(" + =============================================================== + ");
+            System.out.println("||                          TAMBAH RESTORAN                        ||");
+            System.out.println("||                            Admin Menu                           ||");
+            System.out.println(" + --------------------------------------------------------------- + ");
+            System.out.println("||                 Pilih opsi dengan memasukkan angka              ||");
+            System.out.println("||                                                                 ||");
+            System.out.println("||   [1] Lihat Restoran yang Ada                                   ||");
+            System.out.println("||   [2] Tambahkan Restoran baru                                   ||");
+            System.out.println("||   [3] Hapus Restoran yang Ada                                   ||");
+            System.out.println("||   [0] Kembali ke menu log in                                    ||");
             System.out.println(" + =============================================================== + ");
         }
     }
