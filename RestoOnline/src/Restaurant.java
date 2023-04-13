@@ -201,14 +201,50 @@ public class Restaurant {
                 }
             } else if (userInput == 2) { // Mesan minuman
                 int index = 0;
-                RestaurantMessages.lihatMinumanHeader(getNama());
+                // Nunjukin minuman yang ada
+                RestaurantMessages.pesanMinumanHeader(getNama());
                 for (Dish element : listMinuman) {
                     Dish minumanObject = listMinuman.get(index);
                     minumanObject.toString();
                     index++;
                 }
-                RestaurantMessages.lihatMinumanFooter();
-                keyboard.nextLine();
+                RestaurantMessages.pesanMinumanFooter();
+                Messages.inputInstruction();
+                userMenuChoice = keyboard.nextLine();
+                // Memeriksa apakah minuman ada atau tidak
+                if (userMenuChoice.equals("0")) break;
+                else {
+                    index = 0;
+                    for (Dish element : listMinuman) {
+                        Dish minumanObject = listMinuman.get(index);
+                        // Kalau menu yg dicari ditemukan
+                        if (minumanObject.getIdDish().equals(userMenuChoice.toUpperCase())) {
+                            menuFound = true;
+                            // Menyimpan data temporary sebelum dimasukkan ke object
+                            tempIdDish = minumanObject.getIdDish();
+                            tempDishNama = minumanObject.getNama();
+                            tempDishHarga = minumanObject.getHarga();
+
+                            System.out.print("    Banyak kuantitas menu yang dipesan: ");
+                            tempDishKuantitas = keyboard.validationInteger();
+                            tempTotalHarga = tempDishHarga * tempDishKuantitas;
+                            // Memasukkan data ke objek
+                            orderObject.addOrderDetails(tempIdDish, tempDishNama, tempDishHarga, tempDishKuantitas);
+                            //Memunculkan pesanan untuk saat ini
+                            orderObject.showOrders();
+                            orderObject.showOrdersFooter();
+                            keyboard.nextLine();
+
+                            hasOrdered = true;
+                            break;
+                        } else index++;
+                    }
+                    if (!menuFound) {
+                        System.out.println("    Maaf, ID Menu yang Anda masukkan salah, nih.");
+                        System.out.println("    Tekan ENTER untuk kembali.");
+                        keyboard.nextLine();
+                    }
+                }
             }
         }
 

@@ -41,8 +41,8 @@ public class Orders {
         System.out.printf("|| ID Pesanan    : %-69s ||\n", idOrders);
         System.out.printf("|| ID Restoran   : %-69s ||\n", idResto);
         System.out.printf("|| Nama Restoran : %-69s ||\n", namaResto);
-        System.out.printf("|| Jarak         : %-66.2f km ||\n", jarakResto);
-        System.out.println(" + ------------------------------------------------------------------------------------- + ");
+        System.out.printf("|| Jarak         : %-5.2f km                                                              ||\n", jarakResto);
+        // System.out.println(" + ------------------------------------------------------------------------------------- + ");
         showOrderDetails();
         System.out.printf("|| TOTAL SELURUH HARGA                                                  : Rp%-12.2f ||\n", hitungTotalBiaya());
     }
@@ -50,7 +50,7 @@ public class Orders {
     public void showOrderDetails() {
         System.out.println(" + ------------------------------------------------------------------------------------- + ");
         System.out.println("|| ID MENU  |             NAMA PESANAN             | JML |     HARGA    |      TOTAL     ||");
-        System.out.println(" + ------------------------------------------------------------------------------------- + ");
+        System.out.println("|| ------------------------------------------------------------------------------------- ||");
         int index = 0;
         for(OrderDetail element : listOrderDetails) {
             OrderDetail orderDetails = listOrderDetails.get(index);
@@ -61,9 +61,9 @@ public class Orders {
     }
 
     public static void showOrdersFooter() {
-        System.out.println(" + --------------------------------------------------------------- + ");
-        System.out.println("||                  Tekan Enter untuk melanjutkan                  ||");
-        System.out.println(" + =============================================================== + ");
+        System.out.println(" + ------------------------------------------------------------------------------------- + ");
+        System.out.println("||                              Tekan Enter untuk melanjutkan                            ||");
+        System.out.println(" + ===================================================================================== + ");
     }
 
     // Order Details Static Nested Class

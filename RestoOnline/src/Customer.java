@@ -120,7 +120,6 @@ public class Customer extends User {
                                 keyboard.nextLine();
                                 break;
                             } else {
-                                System.out.println("test masih nyari");
                                 index++;
                             }
                         }
