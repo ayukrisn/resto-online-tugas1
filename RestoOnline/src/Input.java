@@ -27,7 +27,7 @@ public class Input {
      * Digunakan untuk memastikan bahwa input yang diberikan
      * sudah sesuai dengan ketentuan: harus integer
      */
-    private int validationInteger() {
+    public int validationInteger() {
         int inputInteger = -1;
         boolean inputValid = false;
 
@@ -100,7 +100,7 @@ public class Input {
                 inputDouble = input.nextDouble();
                 break;
             } catch (InputMismatchException e) {
-                System.out.println("    Mohon masukkan nominal yang benar.");
+                System.out.println("    Mohon masukkan angka yang benar.");
                 input.next();
                 Messages.inputInstruction();
             }
@@ -112,7 +112,7 @@ public class Input {
     * Digunakan untuk mendapatkan dan memvalidasi input pembayaran
      * dari customer
     */
-    public double getHarga() {
+    public double getDouble() {
         double inputPayment = 0;
         boolean inputValid = false;
 
@@ -120,7 +120,7 @@ public class Input {
             inputPayment = validationDouble();
 
             if (inputPayment < 0) {
-                System.out.println("    Mohon masukkan nominal yang benar.");
+                System.out.println("    Mohon masukkan angka yang benar.");
                 Messages.inputInstruction();
             } else {
                 inputValid = true;

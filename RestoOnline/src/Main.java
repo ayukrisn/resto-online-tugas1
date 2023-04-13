@@ -37,7 +37,6 @@ public class Main {
         restoranTest1.getListMakanan().add(new Dish("MAKAN1", "Ikan Gurame Bakar", 40000));
         restoranTest1.getListMakanan().add(new Dish("MAKAN2", "Ikan Tongkol Bakar", 30000));
         restoranTest1.getListMakanan().add(new Dish("MAKAN3", "Nasi Putih", 4000));
-        restoranTest1.getListMakanan().add(new Dish("MAKAN1", "Ikan Gurame Bakar", 40000));
         restoranTest1.getListMinuman().add(new Dish("MINUM1", "Es Teh Manis", 5000));
         restoranTest1.getListMinuman().add(new Dish("MINUM2", "Es Jeruk Manis", 8000));
         listRestoran.add(new Restaurant("RESTO2", "Resto Siliwangi", "Denpasar"));
@@ -57,7 +56,7 @@ public class Main {
             } else if (customer.getIsCustomer()) {
                 customer.customerAccess(listRestoran);
             } else {
-                System.out.println("Ada masalah pada program menu 11");
+                System.out.println("Ada masalah pada program menu");
                 System.exit(0);
             }
         }

@@ -1,11 +1,11 @@
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Customer extends User {
     // Variables
     private boolean isCustomer = false;
 
     private Input keyboard = new Input();
+    private ArrayList<Orders> listOrders = new ArrayList<Orders>();
 
     public Customer() {
         super();
@@ -41,7 +41,7 @@ public class Customer extends User {
     public void customerAccess(ArrayList<Restaurant> listRestaurant) {
         boolean runCustomerAccess = true;
         while(runCustomerAccess) {
-            CustomerMessages.showMenu(); //1. lihat restoran, 2. tambah pesanan, 3. lihat pesanan, 0. kembali ke menu
+            CustomerMessages.showMenu(); //1. lihat restoran, 2. buat pesanan, 3. lihat pesanan, 0. kembali ke menu
             Messages.inputInstruction();
             int userInput = keyboard.getMenuChoice(0,3);
 
@@ -77,7 +77,60 @@ public class Customer extends User {
                         }
                     }
                 }
-            } else if (userInput == 2) { //Tambah pesanan
+            } else if (userInput == 2) { //Buat pesanan
+                boolean runBuatPesanan = true;
+                boolean restaurantFound = false;
+
+                //Variabel yang menyimpan pilihan user
+                String userInputResto = null;
+
+                while (runBuatPesanan) {
+                    restaurantFound = false;
+                    userInputResto = null;
+                    //Pilih restoran
+                    CustomerMessages.buatPesananHeader();
+                    //Nunjukkin restoran yang ada
+                    int index = 0;
+                    for (Restaurant element : listRestaurant) {
+                        Restaurant restaurantObject = listRestaurant.get(index);
+                        restaurantObject.toString();
+                        index++;
+                    }
+                    CustomerMessages.buatPesananFooter();
+                    Messages.inputInstruction();
+                    userInputResto = keyboard.nextLine();
+                    // Periksa apakah ID yang diinput valid atau tidak
+                    // Kalau valid, lanjut pilih menu yang ingin dipesan
+                    if (userInputResto.equals("0")) break;
+                    else {
+                        index = 0;
+                        for (Restaurant element : listRestaurant) {
+                            Restaurant restaurantObject = listRestaurant.get(index);
+                            if (restaurantObject.getIdResto().equals(userInputResto.toUpperCase())) {
+                                restaurantFound = true;
+                                // Menanyakan jarak
+                                System.out.print("    Jarak Anda dengan restoran ini (dalam km): ");
+                                double tempJarak = keyboard.getDouble();
+                                // Akses restoran untuk mengakses menu yang ada dan memasukkannya ke order
+                                String idOrder = "ORDER" + (listOrders.size());
+                                //inisiasi order baru + naruh id resto, nama, dan jarak ke resto
+                                listOrders.add(new Orders(idOrder, userInputResto, restaurantObject.getNama(), tempJarak));
+                                Orders orderObject = listOrders.get(listOrders.size()-1);
+                                restaurantObject.orderRestaurantMenu(orderObject);
+                                keyboard.nextLine();
+                                break;
+                            } else {
+                                System.out.println("test masih nyari");
+                                index++;
+                            }
+                        }
+                        if (!restaurantFound) {
+                            System.out.println("    Maaf, ID Restoran yang Anda masukkan salah, nih.");
+                            System.out.println("    Tekan ENTER untuk kembali.");
+                            keyboard.nextLine();
+                        }
+                    }
+                }
 
             } else if (userInput == 3) { //Lihat pesanan
 
@@ -124,7 +177,21 @@ public class Customer extends User {
         public static void lihatRestoranFooter() {
             System.out.println(" + --------------------------------------------------------------- + ");
             System.out.println("||          Lihat menu restoran dengan memasukkan ID restoran      ||");
-            System.out.println("||                 Klik [0] untuk kembali ke menu admin            ||");
+            System.out.println("||               Klik [0] untuk kembali ke menu customer           ||");
+            System.out.println(" + =============================================================== + ");
+        }
+        public static void buatPesananHeader() {
+            System.out.println(" + =============================================================== + ");
+            System.out.println("||                          BUAT PESANAN                           ||");
+            System.out.println("||                          Customer Menu                          ||");
+            System.out.println(" + --------------------------------------------------------------- + ");
+            System.out.println("|| ID RESTO |         NAMA RESTORAN         |    ALAMAT RESTORAN   ||");
+            System.out.println(" + --------------------------------------------------------------- + ");
+        }
+        public static void buatPesananFooter() {
+            System.out.println(" + --------------------------------------------------------------- + ");
+            System.out.println("||          Lihat menu restoran dengan memasukkan ID restoran      ||");
+            System.out.println("||               Klik [0] untuk kembali ke menu customer           ||");
             System.out.println(" + =============================================================== + ");
         }
     }
