@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Customer extends User {
@@ -37,18 +38,56 @@ public class Customer extends User {
         return hasLoggedIn;
     }
 
-    public void showMenu() {
-        System.out.println(" + =============================================================== + ");
-        System.out.println("||                         T A P  AND  E A T                       ||");
-        System.out.println("||                           Customer Menu                         ||");
-        System.out.println(" + --------------------------------------------------------------- + ");
-        System.out.println("||                 Pilih opsi dengan memasukkan angka              ||");
-        System.out.println("||                                                                 ||");
-        System.out.println("||   [1] Lihat Restoran yang Ada                                   ||");
-        System.out.println("||   [2] Buat Pesanan Baru                                         ||");
-        System.out.println("||   [3] Lihat Riwayat Pemesanan                                   ||");
-        System.out.println("||   [0] Kembali ke menu log in                                    ||");
-        System.out.println(" + =============================================================== + ");
+    public void customerAccess(ArrayList<Restaurant> listRestaurant) {
+        boolean runCustomerAccess = true;
+        while(runCustomerAccess) {
+            CustomerMessages.showMenu(); //1. lihat restoran, 2. tambah pesanan, 3. lihat pesanan, 0. kembali ke menu
+            Messages.inputInstruction();
+            int userInput = keyboard.getMenuChoice(0,3);
+
+            if (userInput == 1) { // Lihat Restoran
+                boolean runLihatRestoran = true;
+                boolean restaurantFound = false;
+                while (runLihatRestoran) {
+                    CustomerMessages.lihatRestoranHeader();
+                    int index = 0;
+                    for (Restaurant element : listRestaurant) {
+                        Restaurant restaurantObject = listRestaurant.get(index);
+                        restaurantObject.toString();
+                        index++;
+                    }
+                    CustomerMessages.lihatRestoranFooter(); // pilih resto dengan ID atau kembali dengan 0
+                    Messages.inputInstruction();
+                    String userInputResto = keyboard.nextLine();
+                    if (userInputResto.equals("0")) break;
+                    else {
+                        index = 0;
+                        for (Restaurant element : listRestaurant) {
+                            Restaurant restaurantObject = listRestaurant.get(index);
+                            if (restaurantObject.getIdResto().equals(userInputResto.toUpperCase())) {
+                                restaurantFound = true;
+                                restaurantObject.seeRestaurantMenu();
+                                break;
+                            } else index++;
+                        }
+                        if (!restaurantFound) {
+                            System.out.println("    Maaf, ID Restoran yang Anda masukkan salah, nih.");
+                            System.out.println("    Tekan ENTER untuk kembali.");
+                            keyboard.nextLine();
+                        }
+                    }
+                }
+            } else if (userInput == 2) { //Tambah pesanan
+
+            } else if (userInput == 3) { //Lihat pesanan
+
+            } else if (userInput == 0) { //Kembali ke menu login
+                break;
+            } else {
+                System.out.println("Ada masalah pada program");
+                System.exit(0);
+            }
+        }
     }
 
     public boolean getIsCustomer() {
@@ -57,5 +96,36 @@ public class Customer extends User {
 
     public void setIsCustomer(boolean customer) {
         isCustomer = customer;
+    }
+
+    static class CustomerMessages {
+        public static void showMenu() {
+            System.out.println(" + =============================================================== + ");
+            System.out.println("||                         T A P  AND  E A T                       ||");
+            System.out.println("||                           Customer Menu                         ||");
+            System.out.println(" + --------------------------------------------------------------- + ");
+            System.out.println("||                 Pilih opsi dengan memasukkan angka              ||");
+            System.out.println("||                                                                 ||");
+            System.out.println("||   [1] Lihat Restoran yang Ada                                   ||");
+            System.out.println("||   [2] Buat Pesanan Baru                                         ||");
+            System.out.println("||   [3] Lihat Riwayat Pemesanan                                   ||");
+            System.out.println("||   [0] Kembali ke menu log in                                    ||");
+            System.out.println(" + =============================================================== + ");
+        }
+
+        public static void lihatRestoranHeader() {
+            System.out.println(" + =============================================================== + ");
+            System.out.println("||                          LIHAT RESTORAN                         ||");
+            System.out.println("||                          Customer Menu                          ||");
+            System.out.println(" + --------------------------------------------------------------- + ");
+            System.out.println("|| ID RESTO |         NAMA RESTORAN         |    ALAMAT RESTORAN   ||");
+            System.out.println(" + --------------------------------------------------------------- + ");
+        }
+        public static void lihatRestoranFooter() {
+            System.out.println(" + --------------------------------------------------------------- + ");
+            System.out.println("||          Lihat menu restoran dengan memasukkan ID restoran      ||");
+            System.out.println("||                 Klik [0] untuk kembali ke menu admin            ||");
+            System.out.println(" + =============================================================== + ");
+        }
     }
 }

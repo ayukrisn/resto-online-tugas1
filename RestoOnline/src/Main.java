@@ -55,7 +55,7 @@ public class Main {
             if (admin.getIsAdmin()) {
                 admin.adminAccess(listRestoran);
             } else if (customer.getIsCustomer()) {
-                customer.showMenu();
+                customer.customerAccess(listRestoran);
             } else {
                 System.out.println("Ada masalah pada program menu 11");
                 System.exit(0);
