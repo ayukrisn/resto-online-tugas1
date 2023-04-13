@@ -1,10 +1,13 @@
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Orders {
     // Variables
     private String idOrders;
     private String idResto;
     private String namaResto;
+    private String waktuOrder;
     private double jarakResto;
     private ArrayList<Orders.OrderDetail> listOrderDetails = new ArrayList<>();
     private Input keyboard = new Input();
@@ -20,9 +23,17 @@ public class Orders {
         this.idResto = idResto;
         this.namaResto = namaResto;
         this.jarakResto = jarakResto;
+        this.waktuOrder = getOrderTime();
     }
 
     // Methods
+    public String getOrderTime() {
+        Date date = new Date();
+        SimpleDateFormat formatter = new SimpleDateFormat("E, dd MMM yyyy HH:mm:ss z");
+        String orderTime = formatter.format(date);
+        return orderTime;
+    }
+
     public void addOrderDetails(String idDish, String namaDish, double hargaDish, int totalPesan) {
         listOrderDetails.add(new OrderDetail(idDish, namaDish,hargaDish, totalPesan));
     }
@@ -46,10 +57,11 @@ public class Orders {
     }
     public void showOrders() {
         System.out.println(" + ------------------------------------------------------------------------------------- + ");
-        System.out.printf("|| ID Pesanan    : %-69s ||\n", idOrders);
-        System.out.printf("|| ID Restoran   : %-69s ||\n", idResto);
-        System.out.printf("|| Nama Restoran : %-69s ||\n", namaResto);
-        System.out.printf("|| Jarak         : %-5.2f km                                                              ||\n", jarakResto);
+        System.out.printf("|| ID Pesanan      : %-67s ||\n", idOrders);
+        System.out.printf("|| ID Restoran     : %-67s ||\n", idResto);
+        System.out.printf("|| Nama Restoran   : %-67s ||\n", namaResto);
+        System.out.printf("|| Jarak           : %-5.2f km                                                            ||\n", jarakResto);
+        System.out.printf("|| Waktu Pemesanan : %-67s ||\n", waktuOrder);
         // System.out.println(" + ------------------------------------------------------------------------------------- + ");
         showOrderDetails();
         System.out.printf("|| TOTAL SELURUH HARGA                                                  : Rp%-12.2f ||\n", hitungTotalBiaya());
@@ -87,7 +99,7 @@ public class Orders {
             totalPembayaran = keyboard.getDouble();
             if (totalPembayaran >= totalBiaya) {
                 kembalian = totalPembayaran - totalBiaya;
-                System.out.printf("    Kembalian: Rp%f\n", kembalian);
+                System.out.printf("    Kembalian: Rp%.2f\n", kembalian);
                 hasPaid = true;
             } else if (totalPembayaran < totalBiaya) {
                 System.out.println("    Maaf, nominal yang kamu masukkan kurang.");
