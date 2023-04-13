@@ -126,6 +126,42 @@ public class Admin extends User {
                 }
 
             } else if (userInput == 3) { //Hapus Restoran
+                boolean runHapusRestaurant = true;
+                boolean restaurantFound = false;
+
+                while (runHapusRestaurant) {
+                    AdminMessages.hapusRestoranHeader();
+                    int index = 0;
+                    for (Restaurant element : listRestaurant) {
+                        Restaurant restaurantObject = listRestaurant.get(index);
+                        restaurantObject.toString();
+                        index++;
+                    }
+                    AdminMessages.hapusRestoranFooter();
+                    Messages.inputInstruction();
+                    String userInputResto = keyboard.nextLine();
+                    if (userInputResto.equals("0")) break;
+                    else {
+                        index = 0;
+                        for (Restaurant element : listRestaurant) {
+                            Restaurant restaurantObject = listRestaurant.get(index);
+                            if (restaurantObject.getIdResto().equals(userInputResto.toUpperCase())) {
+                                restaurantFound = true;
+                                listRestaurant.remove(restaurantObject);
+                                AdminMessages.hapusRestoranDone();
+                                runHapusRestaurant = false;
+                                keyboard.nextLine();
+                                break;
+                            } else index++;
+                        }
+                        if (!restaurantFound) {
+                            System.out.println("    Maaf, ID Restoran yang Anda masukkan salah, nih.");
+                            System.out.println("    Tekan ENTER untuk kembali.");
+                            keyboard.nextLine();
+                        }
+                    }
+
+                }
 
             } else if (userInput == 0) { //Kembali ke menu login
                 break;
@@ -192,6 +228,29 @@ public class Admin extends User {
             System.out.println("||                  Lanjutkan menambahkan restoran?                ||");
             System.out.println("||                                                                 ||");
             System.out.println("||                 [1] Ya                   [2] Tidak              ||");
+            System.out.println(" + =============================================================== + ");
+        }
+
+        public static void hapusRestoranHeader() {
+            System.out.println(" + =============================================================== + ");
+            System.out.println("||                          HAPUS RESTORAN                         ||");
+            System.out.println("||                            Admin Menu                           ||");
+            System.out.println(" + --------------------------------------------------------------- + ");
+            System.out.println("|| ID RESTO |         NAMA RESTORAN         |    ALAMAT RESTORAN   ||");
+            System.out.println(" + --------------------------------------------------------------- + ");
+        }
+
+        public static void hapusRestoranFooter() {
+            System.out.println(" + --------------------------------------------------------------- + ");
+            System.out.println("||             Hapus restoran dengan memasukkan ID restoran        ||");
+            System.out.println("||                 Klik [0] untuk kembali ke menu admin            ||");
+            System.out.println(" + =============================================================== + ");
+        }
+
+        public static void hapusRestoranDone() {
+            System.out.println(" + =============================================================== + ");
+            System.out.println("||                      Restoran berhasil dihapus!                 ||");
+            System.out.println("||                 Klik [0] untuk kembali ke menu admin            ||");
             System.out.println(" + =============================================================== + ");
         }
     }
