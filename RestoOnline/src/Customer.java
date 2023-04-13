@@ -135,6 +135,7 @@ public class Customer extends User {
                 boolean runLihatPesanan = true;
                 int index = 0;
 
+                Orders.showOrdersHeader();
                 while(runLihatPesanan) {
                     for (Orders element : listOrders) {
                         Orders orderObject = listOrders.get(index);

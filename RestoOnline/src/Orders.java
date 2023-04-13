@@ -41,7 +41,6 @@ public class Orders {
     }
 
     public void showOrdersandPayment() {
-        showOrdersHeader();
         showOrders();
         showPayment();
     }
@@ -88,6 +87,7 @@ public class Orders {
             totalPembayaran = keyboard.getDouble();
             if (totalPembayaran >= totalBiaya) {
                 kembalian = totalPembayaran - totalBiaya;
+                System.out.printf("    Kembalian: Rp%f\n", kembalian);
                 hasPaid = true;
             } else if (totalPembayaran < totalBiaya) {
                 System.out.println("    Maaf, nominal yang kamu masukkan kurang.");

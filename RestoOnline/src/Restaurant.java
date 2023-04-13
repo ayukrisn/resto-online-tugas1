@@ -46,6 +46,7 @@ public class Restaurant {
                 runAddMenu = false;
             } else if (userInput == 1) {
                 RestaurantMessages.addMakananOrMinuman("Makanan");
+                idNotValid = true;
                 while (idNotValid) { //memeriksa apakah ID tidak valid (duplikat atau tidak memenuhi persyaratan)
                     System.out.print("    ID Makanan: ");
                     tempIdDish = keyboard.validateID();
@@ -57,7 +58,7 @@ public class Restaurant {
                 }
                 System.out.print("    Nama Makanan: ");
                 tempNamaDish = keyboard.validateString("Nama makanan", 30);
-                System.out.print("    Harga Makanan: ");
+                System.out.print("    Harga Makanan: Rp");
                 tempHargaDish = keyboard.getDouble();
 
                 addMakanan(tempIdDish, tempNamaDish, tempHargaDish);
@@ -65,17 +66,28 @@ public class Restaurant {
                 keyboard.nextLine();
             } else if (userInput == 2) {
                 RestaurantMessages.addMakananOrMinuman("Minuman");
-                System.out.print("   ID Minuman: ");
-                tempIdDish = keyboard.validateID();
-                System.out.print("   Nama Minuman: ");
+                idNotValid = true;
+                while (idNotValid) { //memeriksa apakah ID tidak valid (duplikat atau tidak memenuhi persyaratan)
+                    System.out.print("    ID Minuman: ");
+                    tempIdDish = keyboard.validateID();
+                    idNotValid = keyboard.isIDDishSame(listMinuman, tempIdDish);
+                    if (idNotValid) {
+                        System.out.printf("    ID %s sudah digunakan.\n", tempIdDish);
+                        System.out.println("    Mohon masukkan ID yang baru.");
+                    }
+                }
+                System.out.print("    Nama Minuman: ");
                 tempNamaDish = keyboard.validateString("Nama minuman", 30);
-                System.out.print("   Harga Minuman: ");
+                System.out.print("    Harga Minuman: Rp");
                 tempHargaDish = keyboard.getDouble();
 
                 addMinuman(tempIdDish, tempNamaDish, tempHargaDish);
                 RestaurantMessages.addMenuBerhasil();
                 keyboard.nextLine();
             }
+            tempIdDish = null;
+            tempNamaDish = null;
+            tempHargaDish = 0;
         }
 
     }
@@ -318,7 +330,7 @@ public class Restaurant {
             System.out.println("||                                                                 ||");
             System.out.println("||   [1] Lihat Makanan                                             ||");
             System.out.println("||   [2] Lihat Minuman                                             ||");
-            System.out.println("||   [0] Selesai memesan                                           ||");
+            System.out.println("||   [0] Kembali                                                   ||");
             System.out.println(" + =============================================================== + ");
         }
         public static void lihatMakananHeader(String namaResto) {
@@ -398,7 +410,7 @@ public class Restaurant {
             System.out.printf("||                        TAMBAH RESTORAN: %7s                 ||\n", menu.toUpperCase());
             System.out.println("||                            Admin Menu                           ||");
             System.out.println(" + --------------------------------------------------------------- + ");
-            System.out.printf("|| Mohon masukkan %7s baru dengan informasi sebagai berikut. ||\n", menu);
+            System.out.printf("||  Mohon masukkan %7s baru dengan informasi sebagai berikut. ||\n", menu);
             System.out.printf("||          < ID %7s, Nama %7s, Harga %7s >           ||\n", menu, menu, menu);
             System.out.println(" + =============================================================== + ");
         }

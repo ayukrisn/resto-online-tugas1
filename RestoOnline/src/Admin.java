@@ -101,6 +101,7 @@ public class Admin extends User {
 
                 while (runAddRestaurant) {
                     AdminMessages.tambahRestoranHeader();
+                    idNotValid = true;
                     while (idNotValid) { //memeriksa apakah ID tidak valid (duplikat atau tidak memenuhi persyaratan)
                         System.out.print("    ID Restoran: ");
                         tempIdRestoran = keyboard.validateID();
@@ -147,7 +148,7 @@ public class Admin extends User {
                             Restaurant restaurantObject = listRestaurant.get(index);
                             if (restaurantObject.getIdResto().equals(userInputResto.toUpperCase())) {
                                 restaurantFound = true;
-                                listRestaurant.remove(restaurantObject);
+                                listRestaurant.remove(index);
                                 AdminMessages.hapusRestoranDone();
                                 runHapusRestaurant = false;
                                 keyboard.nextLine();
