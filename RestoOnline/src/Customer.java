@@ -16,6 +16,14 @@ public class Customer extends User {
     }
 
     // Methods
+
+    /**
+     * Method logIn() : untuk melakukan login customer
+     * @param username
+     * @param password
+     * @param nama
+     * @return true kalau username dan password benar, false kalau salah
+     */
     public boolean logIn(String username, String password, String nama) {
         String inputUsername;
         String inputPassword;
@@ -38,6 +46,10 @@ public class Customer extends User {
         return hasLoggedIn;
     }
 
+    /**
+     * Method customerAccess: berisi segala akses yang diberikan kepada Customer
+     * @param listRestaurant
+     */
     public void customerAccess(ArrayList<Restaurant> listRestaurant) {
         boolean runCustomerAccess = true;
         while(runCustomerAccess) {
@@ -164,6 +176,9 @@ public class Customer extends User {
         isCustomer = customer;
     }
 
+    /**
+     * Nested Class for Messages Guide
+     */
     static class CustomerMessages {
         public static void showMenu() {
             System.out.println(" + =============================================================== + ");

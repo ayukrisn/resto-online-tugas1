@@ -17,6 +17,13 @@ public class Dish {
     }
 
     // Methods
+
+    /**
+     * Method equals(): memeriksa apakah kedua objek sama atau tidak
+     *                  biasanya dipakai untuk memeriksa duplikat
+     * @param otherObject
+     * @return
+     */
     public boolean equals(Object otherObject) {
         if (otherObject == null) {
             return false;
@@ -26,7 +33,10 @@ public class Dish {
         return true;
     }
 
-    // Methods
+    /**
+     * Method: toString() : mengubah isi objek ke string
+     * @return
+     */
     public String toString() {
         System.out.printf("|| %-9s| %-37s| Rp%-12.2f||\n", getIdDish(), getNama(), getHarga());
         return null;
@@ -37,24 +47,11 @@ public class Dish {
         return nama;
     }
 
-    public void setNama(String nama) {
-        this.nama = nama;
-    }
-
     public double getHarga() {
         return harga;
     }
 
-    public void setHarga(double harga) {
-        this.harga = harga;
-    }
-
-
     public String getIdDish() {
         return idDish;
-    }
-
-    public void setIdDish(String idDish) {
-        this.idDish = idDish;
     }
 }

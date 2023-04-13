@@ -140,17 +140,10 @@ public class Orders {
             return totalPesan;
         }
 
-        public void setTotalPesan(int totalPesan) {
-            this.totalPesan = totalPesan;
-        }
-
         public double getTotalHarga() {
             return totalHarga;
         }
 
-        public void setTotalHarga(double totalHarga) {
-            this.totalHarga = totalHarga;
-        }
     }
 
 }

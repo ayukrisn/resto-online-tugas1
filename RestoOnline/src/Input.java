@@ -1,9 +1,5 @@
 /**
- * Input: kelas yang mengatur input dari User
- *
- * Fungsi:
- *  1. Menerima input User dalam bentuk integer untuk memilih menu dan input pembayaran
- *  2. Menerima input User untuk menghapus [9] atau selesai [0] memesan
+ * Input: kelas yang mengatur, menerima, dan memvalidasi input dari User
  */
 
 import java.util.ArrayList;
@@ -11,9 +7,6 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Input {
-    // Constants
-    private static final int INPUT_HAPUS = 9;
-    private static final int INPUT_SELESAI = 0;
 
     // Variable
     Scanner input = new Scanner(System.in);
@@ -24,8 +17,10 @@ public class Input {
     // Methods
 
     /**
+     * Methods: validationInteger()
      * Digunakan untuk memastikan bahwa input yang diberikan
      * sudah sesuai dengan ketentuan: harus integer
+     * @return received integer (valid)
      */
     public int validationInteger() {
         int inputInteger = -1;
@@ -55,6 +50,14 @@ public class Input {
      * Memeriksa apakah User memberikan input sesuai dengan
      * menu yang diberikan
      */
+
+    /**
+     * Method: getMenuChoice
+     * Menerima pilihan user sesuai dengan menu yang diberikan
+     * @param range1 batas terkecil
+     * @param range2 batas terbesar
+     * @return received int (valid)
+     */
     public int getMenuChoice(int range1, int range2) {
         int inputMenuChoice = 0;
         boolean inputValid = false;
@@ -74,23 +77,11 @@ public class Input {
         return inputMenuChoice;
     }
 
-    /**
-     * Memeriksa apakah User memberikan input untuk menghapus pilihan
-     */
-    public boolean isDelete(int inputMenuChoice) {
-        return inputMenuChoice == INPUT_HAPUS;
-    }
 
     /**
-     * Memeriksa apakah User memberikan input untuk selesai memesan
-     */
-    public boolean isDoneOrder(int inputMenuChoice) {
-        return inputMenuChoice == INPUT_SELESAI;
-    }
-
-
-    /**
-     * Digunakan untuk memvalidasi input double
+     * Method validationDouble()
+     * Menerima dan memvalidasi input double
+     * @return valid double
      */
     private double validationDouble() {
         double inputDouble = 0;
@@ -109,9 +100,10 @@ public class Input {
     }
 
     /**
-    * Digunakan untuk mendapatkan dan memvalidasi input pembayaran
-     * dari customer
-    */
+     * Method: getDouble
+     * Memeriksa apakah double yang diberikan negatif atau positif
+     * @return valid double
+     */
     public double getDouble() {
         double inputPayment = 0;
         boolean inputValid = false;
@@ -131,7 +123,9 @@ public class Input {
     }
 
     /**
+     * Method: validateID
      * Digunakan untuk validasi input pada saat menambahkan ID
+     * @return valid ID
      */
     public String validateID() {
         boolean inputValid = false;
@@ -162,10 +156,13 @@ public class Input {
         return id;
     }
 
-    /**
-     * Digunakan untuk memeriksa apakah sudah ada ID restoran yang mirip atau tidak
-     */
 
+    /**
+     * Method: isIDRestoSame
+     * @param listRestaurant
+     * @param id
+     * @return true jika sama, false jika tidak
+     */
     public boolean isIDRestoSame(ArrayList<Restaurant> listRestaurant, String id) {
         boolean isIDSame = false;
         int index = 0;
@@ -176,10 +173,14 @@ public class Input {
         return isIDSame;
     }
 
-    /**
-     * Digunakan untuk memeriksa apakah sudah ada ID restoran yang mirip atau tidak
-     */
 
+    /**
+     * Method isIDDishSame
+     * Digunakan untuk memeriksa apakah sudah ada ID makanan yang mirip atau tidak
+     * @param dish
+     * @param id
+     * @return
+     */
     public boolean isIDDishSame(ArrayList<Dish> dish, String id) {
         boolean isIDSame = false;
         int index = 0;
@@ -192,8 +193,12 @@ public class Input {
 
 
     /**
+     * Method validateString()
      * Digunakan untuk validasi input pada saat menambahkan nama atau alamat
      * Nama restoran: length <= 30, nama dish: length <= 37, alamat: <= 21
+     * @param variable
+     * @param limit
+     * @return valid string
      */
     public String validateString(String variable, int limit) {
         boolean inputValid = false;

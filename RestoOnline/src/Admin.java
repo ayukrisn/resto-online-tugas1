@@ -181,7 +181,10 @@ public class Admin extends User {
         isAdmin = admin;
     }
 
-    // Nested Class for Messages Guide
+
+    /**
+     * Nested Class for Messages Guide
+     */
     static class AdminMessages {
         public static void showMenu() {
             System.out.println(" + =============================================================== + ");
