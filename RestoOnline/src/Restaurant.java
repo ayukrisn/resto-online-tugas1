@@ -149,6 +149,9 @@ public class Restaurant {
                     }
                 } else if (hasOrdered) { // Sudah selesai melakukan order
                     runOrderRestaurantMenu = false;
+                    orderObject.showOrders();
+                    orderObject.showOrdersFooter();
+                    orderObject.payment();
                     RestaurantMessages.pemesananDone();
                     keyboard.nextLine();
                     break;
@@ -371,7 +374,8 @@ public class Restaurant {
         }
         public static void pesanMinumanFooter() {
             System.out.println(" + --------------------------------------------------------------- + ");
-            System.out.println("||                      Tekan Enter untuk kembali                  ||");
+            System.out.println("||        Pilih menu yang diinginkan dengan menginput ID Menu      ||");
+            System.out.println("||               Klik [0] untuk kembali ke menu customer           ||");
             System.out.println(" + =============================================================== + ");
         }
 

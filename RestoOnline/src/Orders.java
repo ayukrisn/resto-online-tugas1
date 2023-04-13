@@ -7,7 +7,10 @@ public class Orders {
     private String namaResto;
     private double jarakResto;
     private ArrayList<Orders.OrderDetail> listOrderDetails = new ArrayList<>();
+    private Input keyboard = new Input();
     private double totalBiaya;
+    private double totalPembayaran;
+    private double kembalian;
 
     public Orders () {
     }
@@ -36,6 +39,12 @@ public class Orders {
         this.totalBiaya = totalBiaya;
         return totalBiaya;
     }
+
+    public void showOrdersandPayment() {
+        showOrdersHeader();
+        showOrders();
+        showPayment();
+    }
     public void showOrders() {
         System.out.println(" + ------------------------------------------------------------------------------------- + ");
         System.out.printf("|| ID Pesanan    : %-69s ||\n", idOrders);
@@ -48,7 +57,7 @@ public class Orders {
     }
 
     public void showOrderDetails() {
-        System.out.println(" + ------------------------------------------------------------------------------------- + ");
+        System.out.println("|| ------------------------------------------------------------------------------------- || ");
         System.out.println("|| ID MENU  |             NAMA PESANAN             | JML |     HARGA    |      TOTAL     ||");
         System.out.println("|| ------------------------------------------------------------------------------------- ||");
         int index = 0;
@@ -60,10 +69,37 @@ public class Orders {
         System.out.println(" + ===================================================================================== + ");
     }
 
+    public static void showOrdersHeader() {
+        System.out.println(" + ===================================================================================== + ");
+        System.out.println("||                                      RIWAYAT PEMESANAN                                ||");
+        System.out.println("||                                       Customer Menu                                   ||");
+    }
     public static void showOrdersFooter() {
         System.out.println(" + ------------------------------------------------------------------------------------- + ");
         System.out.println("||                              Tekan Enter untuk melanjutkan                            ||");
         System.out.println(" + ===================================================================================== + ");
+    }
+
+    public void payment() {
+        boolean hasPaid = false;
+        while (!hasPaid){
+            totalPembayaran = 0;
+            System.out.print("    Masukkan nominal pembayaran: Rp");
+            totalPembayaran = keyboard.getDouble();
+            if (totalPembayaran >= totalBiaya) {
+                kembalian = totalPembayaran - totalBiaya;
+                hasPaid = true;
+            } else if (totalPembayaran < totalBiaya) {
+                System.out.println("    Maaf, nominal yang kamu masukkan kurang.");
+                System.out.println("    Mohon lakukan pembayaran lagi.");
+            }
+        }
+
+    }
+
+    public void showPayment() {
+        System.out.printf("|| TOTAL PEMBAYARAN                                                     : Rp%-12.2f ||\n", totalPembayaran);
+        System.out.printf("|| TOTAL KEMBALIAN                                                      : Rp%-12.2f ||\n", kembalian);
     }
 
     // Order Details Static Nested Class

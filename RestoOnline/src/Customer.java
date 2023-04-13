@@ -114,7 +114,7 @@ public class Customer extends User {
                                 // Akses restoran untuk mengakses menu yang ada dan memasukkannya ke order
                                 String idOrder = "ORDER" + (listOrders.size());
                                 //inisiasi order baru + naruh id resto, nama, dan jarak ke resto
-                                listOrders.add(new Orders(idOrder, userInputResto, restaurantObject.getNama(), tempJarak));
+                                listOrders.add(new Orders(idOrder, userInputResto.toUpperCase(), restaurantObject.getNama(), tempJarak));
                                 Orders orderObject = listOrders.get(listOrders.size()-1);
                                 restaurantObject.orderRestaurantMenu(orderObject);
                                 keyboard.nextLine();
@@ -132,6 +132,19 @@ public class Customer extends User {
                 }
 
             } else if (userInput == 3) { //Lihat pesanan
+                boolean runLihatPesanan = true;
+                int index = 0;
+
+                while(runLihatPesanan) {
+                    for (Orders element : listOrders) {
+                        Orders orderObject = listOrders.get(index);
+                        orderObject.showOrdersandPayment();
+                        index++;
+                    }
+                    Orders.showOrdersFooter();
+                    keyboard.nextLine();
+                    break;
+                }
 
             } else if (userInput == 0) { //Kembali ke menu login
                 break;
