@@ -89,8 +89,11 @@ public class Admin extends User {
                     }
                 }
             } else if (userInput == 2) { //Tambah Restoran
+                // variabel untuk memeriksa kevalidan
                 boolean runAddRestaurant = true;
+                boolean idNotValid = true;
                 int userInputAddRestaurant;
+
                 // Variabel untuk restoran
                 String tempIdRestoran = null;
                 String tempNamaRestoran = null;
@@ -98,11 +101,19 @@ public class Admin extends User {
 
                 while (runAddRestaurant) {
                     AdminMessages.tambahRestoranHeader();
-                    System.out.print("   ID Restoran: ");
-                    tempIdRestoran = keyboard.validateID();
-                    System.out.print("   Nama Restoran: ");
+                    while (idNotValid) { //memeriksa apakah ID tidak valid (duplikat atau tidak memenuhi persyaratan)
+                        System.out.print("    ID Restoran: ");
+                        tempIdRestoran = keyboard.validateID();
+                        idNotValid = keyboard.isIDRestoSame(listRestaurant, tempIdRestoran);
+                        if (idNotValid) {
+                            System.out.printf("    ID %s sudah digunakan.\n", tempIdRestoran);
+                            System.out.println("    Mohon masukkan ID yang baru.");
+                        }
+                    }
+
+                    System.out.print("    Nama Restoran: ");
                     tempNamaRestoran = keyboard.validateString("Nama restoran", 30);
-                    System.out.print("   Alamat Restoran: ");
+                    System.out.print("    Alamat Restoran: ");
                     tempAlamatRestoran = keyboard.validateString("Alamat restoran", 21);
                     listRestaurant.add(new Restaurant(tempIdRestoran, tempNamaRestoran, tempAlamatRestoran));
 

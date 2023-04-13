@@ -6,8 +6,10 @@
  *  2. Menerima input User untuk menghapus [9] atau selesai [0] memesan
  */
 
+import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
+
 public class Input {
     // Constants
     private static final int INPUT_HAPUS = 9;
@@ -135,25 +137,59 @@ public class Input {
         boolean inputValid = false;
         String id = null;
         while (!inputValid) {
+            inputValid = true;
             id = input.nextLine();
             if (id.isBlank()) {
                 System.out.println("    ID tidak boleh kosong");
-            } else if (id.length() > 9) {
+                inputValid = false;
+            }
+            if (id.length() > 9) {
                 System.out.println("    Maksimal panjang ID adalah 9 huruf.");
-            } if (id.contains(" ")){
+                inputValid = false;
+            }
+            if (id.contains(" ")) {
                 System.out.println("    ID tidak boleh berisi whitespace.");
-            } else {
-                id = id.toUpperCase();
-                inputValid = true;
+                inputValid = false;
             }
 
             if (!inputValid) {
                 System.out.println("    Mohon masukkan ID yang benar.");
                 System.out.print("    ID:");
+            } else {
+                id = id.toUpperCase();
             }
         }
         return id;
     }
+
+    /**
+     * Digunakan untuk memeriksa apakah sudah ada ID restoran yang mirip atau tidak
+     */
+
+    public boolean isIDRestoSame(ArrayList<Restaurant> listRestaurant, String id) {
+        boolean isIDSame = false;
+        int index = 0;
+
+        for(Restaurant element : listRestaurant) {
+            if(element.getIdResto().equals(id)) isIDSame = true;
+        }
+        return isIDSame;
+    }
+
+    /**
+     * Digunakan untuk memeriksa apakah sudah ada ID restoran yang mirip atau tidak
+     */
+
+    public boolean isIDDishSame(ArrayList<Dish> dish, String id) {
+        boolean isIDSame = false;
+        int index = 0;
+
+        for(Dish element : dish) {
+            if(element.getIdDish().equals(id)) isIDSame = true;
+        }
+        return isIDSame;
+    }
+
 
     /**
      * Digunakan untuk validasi input pada saat menambahkan nama atau alamat
@@ -163,17 +199,19 @@ public class Input {
         boolean inputValid = false;
         String string = null;
         while (!inputValid) {
+            inputValid = true;
             string = input.nextLine();
             if (string.isBlank()) {
                 System.out.printf("    %s tidak boleh kosong\n", variable);
-            } else if (string.length() > limit) {
-                System.out.printf("    Maksimal panjang %s adalah %d huruf.", variable, limit);
-            } else {
-                inputValid = true;
+                inputValid = false;
+            }
+            if (string.length() > limit) {
+                System.out.printf("    Maksimal panjang %s adalah %d huruf.\n", variable, limit);
+                inputValid = false;
             }
 
             if (!inputValid) {
-                System.out.printf("    Mohon masukkan %s yang benar.", variable);
+                System.out.printf("    Mohon masukkan %s yang benar.\n", variable);
                 System.out.printf("    %s:", variable);
             }
         }

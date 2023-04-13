@@ -31,6 +31,7 @@ public class Restaurant {
     public void addMenu() {
         int userInput;
         boolean runAddMenu = true;
+        boolean idNotValid = true;
 
         // Variabel untuk makanan/minuman
         String tempIdDish = null;
@@ -45,11 +46,18 @@ public class Restaurant {
                 runAddMenu = false;
             } else if (userInput == 1) {
                 RestaurantMessages.addMakananOrMinuman("Makanan");
-                System.out.print("   ID Makanan: ");
-                tempIdDish = keyboard.validateID();
-                System.out.print("   Nama Makanan: ");
+                while (idNotValid) { //memeriksa apakah ID tidak valid (duplikat atau tidak memenuhi persyaratan)
+                    System.out.print("    ID Makanan: ");
+                    tempIdDish = keyboard.validateID();
+                    idNotValid = keyboard.isIDDishSame(listMakanan, tempIdDish);
+                    if (idNotValid) {
+                        System.out.printf("    ID %s sudah digunakan.\n", tempIdDish);
+                        System.out.println("    Mohon masukkan ID yang baru.");
+                    }
+                }
+                System.out.print("    Nama Makanan: ");
                 tempNamaDish = keyboard.validateString("Nama makanan", 30);
-                System.out.print("   Harga Makanan: ");
+                System.out.print("    Harga Makanan: ");
                 tempHargaDish = keyboard.getHarga();
 
                 addMakanan(tempIdDish, tempNamaDish, tempHargaDish);
