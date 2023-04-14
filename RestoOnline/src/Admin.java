@@ -1,5 +1,10 @@
+/**
+ * Class: Admin
+ *
+ * Berisi keperluan dan akses admin
+ */
+
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Admin extends User {
     // Variables
@@ -17,10 +22,10 @@ public class Admin extends User {
     // Methods
 
     /**
-     * Method logIn() : untuk melakukan log in pada Admin
-     * @param username
-     * @param password
-     * @param nama
+     * Method logIn() : untuk melakukan log in pada Admin, dicall pada Main class
+     * @param username: menerima username yang benar
+     * @param password: menerima password yang benar
+     * @param nama    : menerima nama user
      * @return true kalau username dan password benar, false kalau salah
      */
     public boolean logIn(String username, String password, String nama) {
@@ -28,12 +33,13 @@ public class Admin extends User {
         String inputPassword;
         boolean hasLoggedIn = false;
 
-        Messages.loginInstruction("ADMINISTRATOR");
+        Messages.loginInstruction("ADMINISTRATOR"); //instruksi login
         System.out.print("  Username: ");
         inputUsername = keyboard.nextLine();
         System.out.print("  Password: ");
         inputPassword = keyboard.nextLine();
 
+        //memeriksa apakah username dan password benar
         if (username.equals(inputUsername) && password.equals(inputPassword)) {
             this.username = inputUsername;
             this.password = inputPassword;
@@ -42,46 +48,51 @@ public class Admin extends User {
         } else {
             hasLoggedIn = false;
         }
-        return hasLoggedIn;
+        return hasLoggedIn; //status apakah login sukses atau tidak
      }
 
     /**
      * Method adminAccess() : berisi segala akses yang diberikan kepada Admin
-     * @param listRestaurant
+     * @param listRestaurant: list restoran dari Restaurant class
      */
     public void adminAccess(ArrayList<Restaurant> listRestaurant) {
         boolean runAdminAccess = true;
         while(runAdminAccess) {
-            AdminMessages.showMenu(); //1. lihat, 2. tambah, 3. hapus, 0. kembali ke menu
+            CLS.clearConsole();
+            AdminMessages.showMenu(); //1. lihat resto, 2. tambah resto, 3. hapus resto, 0. kembali ke menu
             Messages.inputInstruction();
             int userInput = keyboard.getMenuChoice(0,3);
 
             if (userInput == 1) { // Lihat Restoran
+                CLS.clearConsole();
                 boolean runLihatRestoran = true;
                 boolean restaurantFound = false;
                 while (runLihatRestoran) {
+                    CLS.clearConsole();
                     AdminMessages.lihatRestoranHeader();
                     int index = 0;
-                    for (Restaurant element : listRestaurant) {
+                    for (Restaurant element : listRestaurant) { //lihat semua restoran yang ada di list
                         Restaurant restaurantObject = listRestaurant.get(index);
                         restaurantObject.toString();
                         index++;
                     }
                     AdminMessages.lihatRestoranFooter(); // pilih resto dengan ID atau kembali dengan 0
                     Messages.inputInstruction();
-                    String userInputResto = keyboard.nextLine();
-                    if (userInputResto.equals("0")) break;
-                    else {
+                    String userInputIDResto = keyboard.nextLine(); //menerima ID yang diinput user
+                    if (userInputIDResto.equals("0")) break;
+                    else { //memeriksa apakah ID ada atau tidak dgn loop list yg ada
                         index = 0;
                         for (Restaurant element : listRestaurant) {
                             Restaurant restaurantObject = listRestaurant.get(index);
-                            if (restaurantObject.getIdResto().equals(userInputResto.toUpperCase())) {
+                            //jika ID ada, maka restoran ditemukan dan dapat lanjut ke melihat restoran
+                            if (restaurantObject.getIdResto().equals(userInputIDResto.toUpperCase())) {
                                 restaurantFound = true;
-                                restaurantObject.seeRestaurantMenu();
+                                CLS.clearConsole();
+                                restaurantObject.seeRestaurantMenu(); //memanggil method untuk melihat menu restoran yg dipilih
                                 break;
                             } else index++;
                         }
-                        if (!restaurantFound) {
+                        if (!restaurantFound) { //jika ternyata ID tidak ditemukan
                             System.out.println("    Maaf, ID Restoran yang Anda masukkan salah, nih.");
                             System.out.println("    Tekan ENTER untuk kembali.");
                             keyboard.nextLine();
@@ -89,17 +100,19 @@ public class Admin extends User {
                     }
                 }
             } else if (userInput == 2) { //Tambah Restoran
+                CLS.clearConsole();
                 // variabel untuk memeriksa kevalidan
                 boolean runAddRestaurant = true;
                 boolean idNotValid = true;
                 int userInputAddRestaurant;
 
-                // Variabel untuk restoran
+                // Variabel temporary untuk restoran sebelum dimasukkan ke objek
                 String tempIdRestoran = null;
                 String tempNamaRestoran = null;
                 String tempAlamatRestoran = null;
 
                 while (runAddRestaurant) {
+                    CLS.clearConsole();
                     AdminMessages.tambahRestoranHeader();
                     idNotValid = true;
                     while (idNotValid) { //memeriksa apakah ID tidak valid (duplikat atau tidak memenuhi persyaratan)
@@ -116,37 +129,46 @@ public class Admin extends User {
                     tempNamaRestoran = keyboard.validateString("Nama restoran", 30);
                     System.out.print("    Alamat Restoran: ");
                     tempAlamatRestoran = keyboard.validateString("Alamat restoran", 21);
+                    // Menambahkan elemen restoran baru ke list
                     listRestaurant.add(new Restaurant(tempIdRestoran, tempNamaRestoran, tempAlamatRestoran));
 
                     Restaurant restaurant = listRestaurant.get(listRestaurant.size()-1);
-                    restaurant.addMenu();
-                    AdminMessages.tambahRestoranLagi();
+                    CLS.clearConsole();
+                    boolean addMenuDone= restaurant.addMenu(); //masuk ke method untuk menambahkan menu pada restoran
+                    if (!addMenuDone) { //jika ternyata user tidak menambahkan menu apapun, hapus restoran
+                        listRestaurant.remove(listRestaurant.size()-1);
+                        break;
+                    }
+                    AdminMessages.tambahRestoranLagi(); //1. tambah lagi, 2. berhenti
                     Messages.inputInstruction();
                     userInputAddRestaurant = keyboard.getMenuChoice(1,2);
                     if (userInputAddRestaurant == 2) break;
                 }
 
             } else if (userInput == 3) { //Hapus Restoran
+                CLS.clearConsole();
                 boolean runHapusRestaurant = true;
                 boolean restaurantFound = false;
 
                 while (runHapusRestaurant) {
+                    CLS.clearConsole();
                     AdminMessages.hapusRestoranHeader();
                     int index = 0;
-                    for (Restaurant element : listRestaurant) {
+                    for (Restaurant element : listRestaurant) { //memunculkan seluruh restoran yang ada di list
                         Restaurant restaurantObject = listRestaurant.get(index);
                         restaurantObject.toString();
                         index++;
                     }
-                    AdminMessages.hapusRestoranFooter();
+                    AdminMessages.hapusRestoranFooter(); //memasukkan ID resto yang ingin dihapus
                     Messages.inputInstruction();
                     String userInputResto = keyboard.nextLine();
                     if (userInputResto.equals("0")) break;
                     else {
                         index = 0;
-                        for (Restaurant element : listRestaurant) {
+                        for (Restaurant element : listRestaurant) { //mencari ID resto yang diinput user
                             Restaurant restaurantObject = listRestaurant.get(index);
                             if (restaurantObject.getIdResto().equals(userInputResto.toUpperCase())) {
+                                // kalau ketemu, hapusresto
                                 restaurantFound = true;
                                 listRestaurant.remove(index);
                                 AdminMessages.hapusRestoranDone();
@@ -155,7 +177,7 @@ public class Admin extends User {
                                 break;
                             } else index++;
                         }
-                        if (!restaurantFound) {
+                        if (!restaurantFound) { //kalau tidak, kembali
                             System.out.println("    Maaf, ID Restoran yang Anda masukkan salah, nih.");
                             System.out.println("    Tekan ENTER untuk kembali.");
                             keyboard.nextLine();
@@ -165,8 +187,9 @@ public class Admin extends User {
                 }
 
             } else if (userInput == 0) { //Kembali ke menu login
+                CLS.clearConsole();
                 break;
-            } else {
+            } else { //seharusnya program tidak menyentuh bagian ini
                 System.out.println("Ada masalah pada program");
                 System.exit(0);
             }
@@ -254,7 +277,7 @@ public class Admin extends User {
         public static void hapusRestoranDone() {
             System.out.println(" + =============================================================== + ");
             System.out.println("||                      Restoran berhasil dihapus!                 ||");
-            System.out.println("||                 Klik [0] untuk kembali ke menu admin            ||");
+            System.out.println("||                Tekan ENTER untuk kembali ke menu admin          ||");
             System.out.println(" + =============================================================== + ");
         }
     }

@@ -29,6 +29,8 @@ public class Messages {
     public static void loggedInGreeting(String userName) {
         System.out.println(" + =============================================================== + ");
         System.out.printf("||                      Welcome, %-34s||\n", userName);
+        System.out.println("||                                                                 ||");
+        System.out.println("||                  Tekan Enter untuk melanjutkan                  ||");
         System.out.println(" + =============================================================== + ");
     }
 
@@ -65,4 +67,3 @@ public class Messages {
         System.out.print("    Masukkan pilihan: ");
     }
 }
-

@@ -2,6 +2,11 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+/**
+ * Class Orders dan nested class OrderDetail
+ *
+ * Berisi variabel dan keperluan untuk order
+ */
 public class Orders {
     // Variables
     private String idOrders;
@@ -27,6 +32,11 @@ public class Orders {
     }
 
     // Methods
+
+    /**
+     * Method getOrderTime()
+     * @return waktu pemesanan dalam bentuk string
+     */
     public String getOrderTime() {
         Date date = new Date();
         SimpleDateFormat formatter = new SimpleDateFormat("E, dd MMM yyyy HH:mm:ss z");
@@ -34,14 +44,26 @@ public class Orders {
         return orderTime;
     }
 
+    /**
+     * Method addOrderDetails() : menambahkan detail order ke dalam list
+     *   Dipanggil di class Restaurant
+     * @param idDish yang diterima
+     * @param namaDish yang diterima
+     * @param hargaDish yang diterima
+     * @param totalPesan yang diterima
+     */
     public void addOrderDetails(String idDish, String namaDish, double hargaDish, int totalPesan) {
         listOrderDetails.add(new OrderDetail(idDish, namaDish,hargaDish, totalPesan));
     }
 
+    /**
+     * Method hitungTotalBiaya() : menghitung total biaya pemesanan
+     * @return total biaya
+     */
     public double hitungTotalBiaya() {
         int index = 0;
         double totalBiaya = 0;
-        for (OrderDetail element : listOrderDetails){
+        for (OrderDetail element : listOrderDetails){ //menambahkan seluruh total biaya
             OrderDetail orderDetails = listOrderDetails.get(index);
             totalBiaya += orderDetails.getTotalHarga();
             index++;
@@ -51,10 +73,19 @@ public class Orders {
         return totalBiaya;
     }
 
+    /**
+     * Method: showOrdersandPayment()
+     * Menunjukkan order dan riwayat pembayaran
+     */
     public void showOrdersandPayment() {
         showOrders();
         showPayment();
     }
+
+    /**
+     * Method: showOrders()
+     * Menunjukkan order dengan showOrderDetails();
+     */
     public void showOrders() {
         System.out.println(" + ------------------------------------------------------------------------------------- + ");
         System.out.printf("|| ID Pesanan      : %-67s ||\n", idOrders);
@@ -67,6 +98,9 @@ public class Orders {
         System.out.printf("|| TOTAL SELURUH HARGA                                                  : Rp%-12.2f ||\n", hitungTotalBiaya());
     }
 
+    /**
+     * Method: showOrderDetails() : menunjukkan detail order
+     */
     public void showOrderDetails() {
         System.out.println("|| ------------------------------------------------------------------------------------- || ");
         System.out.println("|| ID MENU  |             NAMA PESANAN             | JML |     HARGA    |      TOTAL     ||");
@@ -80,7 +114,18 @@ public class Orders {
         System.out.println(" + ===================================================================================== + ");
     }
 
-    public static void showOrdersHeader() {
+    public static void payOrdersHeader() {
+        System.out.println(" + ===================================================================================== + ");
+        System.out.println("||                                    PEMBAYARAN PEMESANAN                                ||");
+        System.out.println("||                                       Customer Menu                                   ||");
+    }
+
+    public static void payOrdersFooter() {
+        System.out.println(" + ------------------------------------------------------------------------------------- + ");
+        System.out.println("||                      Masukkan nominal pembayaran Anda di bawah ini                    ||");
+        System.out.println(" + ===================================================================================== + ");
+    }
+    public static void showOrderLogsHeader() {
         System.out.println(" + ===================================================================================== + ");
         System.out.println("||                                      RIWAYAT PEMESANAN                                ||");
         System.out.println("||                                       Customer Menu                                   ||");
@@ -91,6 +136,10 @@ public class Orders {
         System.out.println(" + ===================================================================================== + ");
     }
 
+    /**
+     * Method: payment()
+     * Melakukan pembayaran setelah pemesanan selesai dilakukan
+     */
     public void payment() {
         boolean hasPaid = false;
         while (!hasPaid){
@@ -109,12 +158,18 @@ public class Orders {
 
     }
 
+    /**
+     * Method: showPayment()
+     * Menunjukkan total pembayaran dan kembalian
+     */
     public void showPayment() {
         System.out.printf("|| TOTAL PEMBAYARAN                                                     : Rp%-12.2f ||\n", totalPembayaran);
         System.out.printf("|| TOTAL KEMBALIAN                                                      : Rp%-12.2f ||\n", kembalian);
     }
 
-    // Order Details Static Nested Class
+    /**
+     * Order Details static nested class
+     */
     static class OrderDetail extends Dish {
         // Variables
         private int totalPesan;

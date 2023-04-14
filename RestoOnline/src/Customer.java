@@ -1,3 +1,9 @@
+/**
+ * Class: Customer
+ *
+ * Berisi keperluan dan akses customer
+ */
+
 import java.util.ArrayList;
 
 public class Customer extends User {
@@ -19,9 +25,9 @@ public class Customer extends User {
 
     /**
      * Method logIn() : untuk melakukan login customer
-     * @param username
-     * @param password
-     * @param nama
+     * @param username: menerima username yang benar
+     * @param password: menerima password yang benar
+     * @param nama    : menerima nama user
      * @return true kalau username dan password benar, false kalau salah
      */
     public boolean logIn(String username, String password, String nama) {
@@ -29,12 +35,13 @@ public class Customer extends User {
         String inputPassword;
         boolean hasLoggedIn = false;
 
-        Messages.loginInstruction("CUSTOMER");
+        Messages.loginInstruction("CUSTOMER"); // instruksi login
         System.out.print("  Username: ");
         inputUsername = keyboard.nextLine();
         System.out.print("  Password: ");
         inputPassword = keyboard.nextLine();
 
+        //memeriksa apakah username dan password benar
         if (username.equals(inputUsername) && password.equals(inputPassword)) {
             this.username = inputUsername;
             this.password = inputPassword;
@@ -43,46 +50,51 @@ public class Customer extends User {
         } else {
             hasLoggedIn = false;
         }
-        return hasLoggedIn;
+        return hasLoggedIn; //status apakah login sukses atau tidak
     }
 
     /**
      * Method customerAccess: berisi segala akses yang diberikan kepada Customer
-     * @param listRestaurant
+     * @param listRestaurant list restoran dari Restaurant class
      */
     public void customerAccess(ArrayList<Restaurant> listRestaurant) {
         boolean runCustomerAccess = true;
         while(runCustomerAccess) {
+            CLS.clearConsole();
             CustomerMessages.showMenu(); //1. lihat restoran, 2. buat pesanan, 3. lihat pesanan, 0. kembali ke menu
             Messages.inputInstruction();
             int userInput = keyboard.getMenuChoice(0,3);
 
             if (userInput == 1) { // Lihat Restoran
+                CLS.clearConsole();
                 boolean runLihatRestoran = true;
                 boolean restaurantFound = false;
                 while (runLihatRestoran) {
+                    CLS.clearConsole();
                     CustomerMessages.lihatRestoranHeader();
                     int index = 0;
-                    for (Restaurant element : listRestaurant) {
+                    for (Restaurant element : listRestaurant) { //lihat semua restoran yang ada di list
                         Restaurant restaurantObject = listRestaurant.get(index);
                         restaurantObject.toString();
                         index++;
                     }
                     CustomerMessages.lihatRestoranFooter(); // pilih resto dengan ID atau kembali dengan 0
                     Messages.inputInstruction();
-                    String userInputResto = keyboard.nextLine();
-                    if (userInputResto.equals("0")) break;
-                    else {
+                    String userInputIDResto = keyboard.nextLine(); //menerima ID yang diinput user
+                    if (userInputIDResto.equals("0")) break;
+                    else { //memeriksa apakah ID ada atau tidak dgn loop list yg ada
                         index = 0;
                         for (Restaurant element : listRestaurant) {
                             Restaurant restaurantObject = listRestaurant.get(index);
-                            if (restaurantObject.getIdResto().equals(userInputResto.toUpperCase())) {
+                            //jika ID ada, maka restoran ditemukan dan dapat lanjut ke melihat restoran
+                            if (restaurantObject.getIdResto().equals(userInputIDResto.toUpperCase())) {
                                 restaurantFound = true;
-                                restaurantObject.seeRestaurantMenu();
+                                CLS.clearConsole();
+                                restaurantObject.seeRestaurantMenu(); //memanggil method untuk melihat menu restoran yg dipilih
                                 break;
                             } else index++;
                         }
-                        if (!restaurantFound) {
+                        if (!restaurantFound) { //jika ternyata ID tidak ditemukan
                             System.out.println("    Maaf, ID Restoran yang Anda masukkan salah, nih.");
                             System.out.println("    Tekan ENTER untuk kembali.");
                             keyboard.nextLine();
@@ -97,18 +109,18 @@ public class Customer extends User {
                 String userInputResto = null;
 
                 while (runBuatPesanan) {
+                    CLS.clearConsole();
                     restaurantFound = false;
                     userInputResto = null;
                     //Pilih restoran
                     CustomerMessages.buatPesananHeader();
-                    //Nunjukkin restoran yang ada
                     int index = 0;
-                    for (Restaurant element : listRestaurant) {
+                    for (Restaurant element : listRestaurant) { //Nunjukkin restoran yang ada di list
                         Restaurant restaurantObject = listRestaurant.get(index);
                         restaurantObject.toString();
                         index++;
                     }
-                    CustomerMessages.buatPesananFooter();
+                    CustomerMessages.buatPesananFooter(); //memilih resto yang ingin dipesan
                     Messages.inputInstruction();
                     userInputResto = keyboard.nextLine();
                     // Periksa apakah ID yang diinput valid atau tidak
@@ -116,20 +128,26 @@ public class Customer extends User {
                     if (userInputResto.equals("0")) break;
                     else {
                         index = 0;
-                        for (Restaurant element : listRestaurant) {
+                        for (Restaurant element : listRestaurant) { //memeriksa resto berdasarkan ID
                             Restaurant restaurantObject = listRestaurant.get(index);
                             if (restaurantObject.getIdResto().equals(userInputResto.toUpperCase())) {
+                                // jika resto ditemukan, lanjutan pemesanan
                                 restaurantFound = true;
                                 // Menanyakan jarak
                                 System.out.print("    Jarak Anda dengan restoran ini (dalam km): ");
                                 double tempJarak = keyboard.getDouble();
                                 // Akses restoran untuk mengakses menu yang ada dan memasukkannya ke order
-                                String idOrder = "ORDER" + (listOrders.size());
+                                String idOrder = "ORDER" + (listOrders.size()+1);
                                 //inisiasi order baru + naruh id resto, nama, dan jarak ke resto
                                 listOrders.add(new Orders(idOrder, userInputResto.toUpperCase(), restaurantObject.getNama(), tempJarak));
                                 Orders orderObject = listOrders.get(listOrders.size()-1);
-                                restaurantObject.orderRestaurantMenu(orderObject);
-                                keyboard.nextLine();
+                                CLS.clearConsole();
+                                boolean hasOrdered = restaurantObject.orderRestaurantMenu(orderObject); //memanggil method untuk memesan menu pada resto yang dipilih
+                                if (!hasOrdered) { //jika ternyata user tidak menambahkan order makanan apapun, hapus objek order
+                                    listOrders.remove(listOrders.size()-1);
+                                    keyboard.nextLine();
+                                    break;
+                                } keyboard.nextLine();
                                 break;
                             } else {
                                 index++;
@@ -147,8 +165,9 @@ public class Customer extends User {
                 boolean runLihatPesanan = true;
                 int index = 0;
 
-                Orders.showOrdersHeader();
-                while(runLihatPesanan) {
+                CLS.clearConsole();
+                Orders.showOrderLogsHeader();
+                while(runLihatPesanan) { //memperlihatkan pesanan yang ada di list order
                     for (Orders element : listOrders) {
                         Orders orderObject = listOrders.get(index);
                         orderObject.showOrdersandPayment();

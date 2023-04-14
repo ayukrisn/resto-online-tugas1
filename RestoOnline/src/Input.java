@@ -224,13 +224,6 @@ public class Input {
     }
 
     /**
-     * Pause
-     */
-    public void pause() {
-        input.nextLine();
-    }
-
-    /**
      * String
      */
     public String nextLine() {
