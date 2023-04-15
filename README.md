@@ -26,7 +26,7 @@ Matkul  : PBO E <br/>
 
 # Bagaimana Program Dijalankan
 Program ini dijalankan dengan menerapkan beberapa konsep di bawah ini: <br/>
-**1. Penggunaan Class dan Object** <br/>      
+**1. Penggunaan Class dan Object**    
 **2. Penggunaan Flow Control** (khususnya while loop, for each loop, if-else, dan switch case) <br/>
 **3. ArrayList** <br/>
 **4. Shallow Copy** <br/>
