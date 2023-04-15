@@ -16,7 +16,8 @@ public class Orders {
     private double jarakResto;
     private ArrayList<Orders.OrderDetail> listOrderDetails = new ArrayList<>();
     private Input keyboard = new Input();
-    private double totalBiaya;
+    private double totalBiayaMakanan;
+    private double biayaPengantaran;
     private double totalPembayaran;
     private double kembalian;
 
@@ -56,6 +57,15 @@ public class Orders {
         listOrderDetails.add(new OrderDetail(idDish, namaDish,hargaDish, totalPesan));
     }
 
+    public void hitungBiayaPengantaran() {
+        double biayaPengantaran = 0;
+        if (jarakResto < 1) biayaPengantaran = 0;
+        else if (jarakResto <= 1 && jarakResto >=3) biayaPengantaran = 5000;
+        else if (jarakResto > 3) biayaPengantaran = (jarakResto / 3)*5000;
+
+        this.biayaPengantaran = biayaPengantaran;
+    }
+
     /**
      * Method hitungTotalBiaya() : menghitung total biaya pemesanan
      * @return total biaya
@@ -63,13 +73,15 @@ public class Orders {
     public double hitungTotalBiaya() {
         int index = 0;
         double totalBiaya = 0;
-        for (OrderDetail element : listOrderDetails){ //menambahkan seluruh total biaya
+        for (OrderDetail element : listOrderDetails){ //menambahkan seluruh total biaya makanan
             OrderDetail orderDetails = listOrderDetails.get(index);
             totalBiaya += orderDetails.getTotalHarga();
             index++;
         }
+        //menambahkan biaya pengantaran
+        totalBiaya += biayaPengantaran;
 
-        this.totalBiaya = totalBiaya;
+        this.totalBiayaMakanan = totalBiaya;
         return totalBiaya;
     }
 
@@ -95,6 +107,8 @@ public class Orders {
         System.out.printf("|| Waktu Pemesanan : %-67s ||\n", waktuOrder);
         // System.out.println(" + ------------------------------------------------------------------------------------- + ");
         showOrderDetails();
+        hitungBiayaPengantaran();
+        System.out.printf("|| BIAYA PENGANTARAN                                                    : Rp%-12.2f ||\n", biayaPengantaran);
         System.out.printf("|| TOTAL SELURUH HARGA                                                  : Rp%-12.2f ||\n", hitungTotalBiaya());
     }
 
@@ -146,11 +160,11 @@ public class Orders {
             totalPembayaran = 0;
             System.out.print("    Masukkan nominal pembayaran: Rp");
             totalPembayaran = keyboard.getDouble();
-            if (totalPembayaran >= totalBiaya) {
-                kembalian = totalPembayaran - totalBiaya;
+            if (totalPembayaran >= totalBiayaMakanan) {
+                kembalian = totalPembayaran - totalBiayaMakanan;
                 System.out.printf("    Kembalian: Rp%.2f\n", kembalian);
                 hasPaid = true;
-            } else if (totalPembayaran < totalBiaya) {
+            } else if (totalPembayaran < totalBiayaMakanan) {
                 System.out.println("    Maaf, nominal yang kamu masukkan kurang.");
                 System.out.println("    Mohon lakukan pembayaran lagi.");
             }
