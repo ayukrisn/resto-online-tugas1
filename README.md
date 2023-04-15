@@ -93,6 +93,27 @@ Bila ternyata Admin belum memasukkan menu apapun dan memilih Selesai, maka progr
 Admin dapat menghapus restoran yang ada dengan memberikan input ID Resto seperti pada contoh di atas. Setelahnya, restoran tersebut akan dihapus dan tidak dapat dilihat pada list restoran.
 
 ## Buat Pesanan Baru
-<img width="424" alt="image" src="https://user-images.githubusercontent.com/113322119/232233694-8d027cc2-402f-4fa0-b2c2-a113cf9bb149.png">
-Customer memiliki akses untuk membuat pesanan baru. Pertama, customer akan memilih restoran tempat dia ingin memesan dengan memberikan input berupa ID Resto yang dipilih. Setelahnya, program akan meminta customer untuk memberi input jaraknya dengan restoran
+<img width="419" alt="image" src="https://user-images.githubusercontent.com/113322119/232236190-65b77956-71b1-4f2f-bc1a-bcbe2dee90cd.png">
+Customer memiliki akses untuk membuat pesanan baru. Pertama, customer akan memilih restoran tempat dia ingin memesan dengan memberikan input berupa ID Resto yang dipilih. Setelahnya, program akan meminta customer untuk memberi input jaraknya dengan restoran yang mana akan digunakan untuk menghitung biaya pengantaran.
+
+### Memilih Menu
+<img width="426" alt="image" src="https://user-images.githubusercontent.com/113322119/232236272-5a103060-fb3c-4ed6-846a-6f772304183d.png">
+<img width="421" alt="image" src="https://user-images.githubusercontent.com/113322119/232236363-3b2a0325-7bc0-4791-9e98-ece7263ab049.png">
+Setelah memilih restoran, Customer dapat lanjut memilih menu dengan memilih menu makanan, minuman, atau selesai memesan seperti pada screenshot di atas. Customer dapat menambahkan makanan atau minuman yang diinginkan dengan menginput id menu yang tertera dan memasukkan jumlah menu yang diinginkan. <br/>
+<img width="557" alt="image" src="https://user-images.githubusercontent.com/113322119/232237134-65388330-59d7-4b17-8688-8e568fe03afb.png">
+Setelah selesai, Customer akan mendapatkan preview total harga saat ini dan selanjutnya akan diarahkan ke menu pada screenshot pertama pada saat memilih menu dan dapat kembali menambahkan pesanan atau pun selesai melakukan pemesanan.
+
+### Pembayaran
+<img width="552" alt="image" src="https://user-images.githubusercontent.com/113322119/232237267-921c740f-50f5-49f8-a4f2-d4cf11fd95fa.png">
+<img width="558" alt="image" src="https://user-images.githubusercontent.com/113322119/232237320-5d36e015-c8bb-46ad-85b6-525dc023dca3.png">
+Jika sudah selesai, Customer akan diarahkan ke bagian pembayaran seperti screenshot di atas ini. Customer dapat memasukkan nominal pembayarannya dan mendapatkan kembalian bila ada. Setelahnya, Customer akan diarahkan untuk kembali ke menu akses Customer.
+
+### Membatalkan Pemesanan
+<img width="428" alt="image" src="https://user-images.githubusercontent.com/113322119/232237368-8a707118-e326-4c9b-97d1-6548c20cc6a0.png">
+Bila ternyata Customer memilih menyelesaikan pemesanan tanpa menambahkan pesanan apapun, maka pemesanan bisa dianggap batal seperti pada screenshot di atas ini.
+
+## Lihat Riwayat Pemesanan
+<img width="561" alt="image" src="https://user-images.githubusercontent.com/113322119/232237441-f9ebcecb-bf36-4049-858e-bfe5a8d6b9bd.png">
+<img width="556" alt="image" src="https://user-images.githubusercontent.com/113322119/232237456-9411765e-a163-4584-98b5-799c435f7b92.png">
+Customer dapat melihat pemesanan yang telah dilakukan sebelumnya melalui menu Lihat Riwayat Pemesanan seperti pada screenshot di atas.
 
