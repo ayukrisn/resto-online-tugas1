@@ -2,10 +2,8 @@
 Hi! Ini adalah proyek kecil untuk pemesanan makanan online demi menuntaskan Tugas I PBO saya. 
 <br/> <br/>
 Program Java ini dirancang untuk dua jenis user dengan akses yang berbeda, yaitu: <br/>
-**1. Admin** diberikan akses untuk: 
-     emsp Melihat restoran, menambahkan restoran, dan menghapus restoran. <br/>
-**2. Customer** diberikan akses untuk:
-     emsp Melihat restoran, membuat pesanan, dan melihat pesanan. <br/>
+**1. Admin** diberikan akses untuk melihat restoran, menambahkan restoran, dan menghapus restoran. <br/>
+**2. Customer** diberikan akses untuk melihat restoran, membuat pesanan, dan melihat pesanan. <br/>
      
 Program ini juga dilengkapi dengan **input validasi pada class Input** untuk memastikan pengguna memberikan input yang sesuai dengan yang dibutuhkan oleh program. <br/> <br/>
 Di bawah ini adalah deskripsi program, penjelasan dari bagaimana program akan dijalankan, dan UML dari program ini. Untuk deskripsi kode lebih lengkap dapat dilihat pada kode program yang sudah dicommit sebelumnya (sudah disertakan beberapa comment untuk membantu dalam mengerti cara kerja program). Selamat menyimak :>
@@ -20,6 +18,7 @@ Matkul  : PBO E <br/>
 <br/>
 
 # UML
+![UML Resto Online drawio](https://user-images.githubusercontent.com/113322119/232544531-40833b34-317c-4331-893f-6923a60c3b1d.png)
 
 
 <br/>
