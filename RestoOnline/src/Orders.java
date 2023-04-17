@@ -86,6 +86,27 @@ public class Orders {
     }
 
     /**
+     * Method: payment()
+     * Melakukan pembayaran setelah pemesanan selesai dilakukan
+     */
+    public void payment() {
+        boolean hasPaid = false;
+        while (!hasPaid){
+            totalPembayaran = 0;
+            System.out.print("    Masukkan nominal pembayaran: Rp");
+            totalPembayaran = keyboard.getDouble();
+            if (totalPembayaran >= totalBiayaMakanan) {
+                kembalian = totalPembayaran - totalBiayaMakanan;
+                System.out.printf("    Kembalian: Rp%.2f\n", kembalian);
+                hasPaid = true;
+            } else if (totalPembayaran < totalBiayaMakanan) {
+                System.out.println("    Maaf, nominal yang kamu masukkan kurang.");
+                System.out.println("    Mohon lakukan pembayaran lagi.");
+            }
+        }
+    }
+
+    /**
      * Method: showOrdersandPayment()
      * Menunjukkan order dan riwayat pembayaran
      */
@@ -110,6 +131,15 @@ public class Orders {
         hitungBiayaPengantaran();
         System.out.printf("|| BIAYA PENGANTARAN                                                    : Rp%-12.2f ||\n", biayaPengantaran);
         System.out.printf("|| TOTAL SELURUH HARGA                                                  : Rp%-12.2f ||\n", hitungTotalBiaya());
+    }
+
+    /**
+     * Method: showPayment()
+     * Menunjukkan total pembayaran dan kembalian
+     */
+    public void showPayment() {
+        System.out.printf("|| TOTAL PEMBAYARAN                                                     : Rp%-12.2f ||\n", totalPembayaran);
+        System.out.printf("|| TOTAL KEMBALIAN                                                      : Rp%-12.2f ||\n", kembalian);
     }
 
     /**
@@ -150,36 +180,6 @@ public class Orders {
         System.out.println(" + ===================================================================================== + ");
     }
 
-    /**
-     * Method: payment()
-     * Melakukan pembayaran setelah pemesanan selesai dilakukan
-     */
-    public void payment() {
-        boolean hasPaid = false;
-        while (!hasPaid){
-            totalPembayaran = 0;
-            System.out.print("    Masukkan nominal pembayaran: Rp");
-            totalPembayaran = keyboard.getDouble();
-            if (totalPembayaran >= totalBiayaMakanan) {
-                kembalian = totalPembayaran - totalBiayaMakanan;
-                System.out.printf("    Kembalian: Rp%.2f\n", kembalian);
-                hasPaid = true;
-            } else if (totalPembayaran < totalBiayaMakanan) {
-                System.out.println("    Maaf, nominal yang kamu masukkan kurang.");
-                System.out.println("    Mohon lakukan pembayaran lagi.");
-            }
-        }
-
-    }
-
-    /**
-     * Method: showPayment()
-     * Menunjukkan total pembayaran dan kembalian
-     */
-    public void showPayment() {
-        System.out.printf("|| TOTAL PEMBAYARAN                                                     : Rp%-12.2f ||\n", totalPembayaran);
-        System.out.printf("|| TOTAL KEMBALIAN                                                      : Rp%-12.2f ||\n", kembalian);
-    }
 
     /**
      * Order Details static nested class

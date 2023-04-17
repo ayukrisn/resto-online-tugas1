@@ -59,7 +59,7 @@ public class Admin extends User {
         boolean runAdminAccess = true;
         while(runAdminAccess) {
             CLS.clearConsole();
-            AdminMessages.showMenu(); //1. lihat resto, 2. tambah resto, 3. hapus resto, 0. kembali ke menu
+            showMenu(); //1. lihat resto, 2. tambah resto, 3. hapus resto, 0. kembali ke menu
             Messages.inputInstruction();
             int userInput = keyboard.getMenuChoice(0,3);
 
@@ -69,14 +69,14 @@ public class Admin extends User {
                 boolean restaurantFound = false;
                 while (runLihatRestoran) {
                     CLS.clearConsole();
-                    AdminMessages.lihatRestoranHeader();
+                    showLihatRestoranHeader();
                     int index = 0;
                     for (Restaurant element : listRestaurant) { //lihat semua restoran yang ada di list
                         Restaurant restaurantObject = listRestaurant.get(index);
                         restaurantObject.toString();
                         index++;
                     }
-                    AdminMessages.lihatRestoranFooter(); // pilih resto dengan ID atau kembali dengan 0
+                    showLihatRestoranFooter(); // pilih resto dengan ID atau kembali dengan 0
                     Messages.inputInstruction();
                     String userInputIDResto = keyboard.nextLine(); //menerima ID yang diinput user
                     if (userInputIDResto.equals("0")) break;
@@ -113,7 +113,7 @@ public class Admin extends User {
 
                 while (runAddRestaurant) {
                     CLS.clearConsole();
-                    AdminMessages.tambahRestoranHeader();
+                    showTambahRestoranHeader();
                     idNotValid = true;
                     while (idNotValid) { //memeriksa apakah ID tidak valid (duplikat atau tidak memenuhi persyaratan)
                         System.out.print("    ID Restoran: ");
@@ -139,7 +139,7 @@ public class Admin extends User {
                         listRestaurant.remove(listRestaurant.size()-1);
                         break;
                     }
-                    AdminMessages.tambahRestoranLagi(); //1. tambah lagi, 2. berhenti
+                    showTambahRestoranLagi(); //1. tambah lagi, 2. berhenti
                     Messages.inputInstruction();
                     userInputAddRestaurant = keyboard.getMenuChoice(1,2);
                     if (userInputAddRestaurant == 2) break;
@@ -152,14 +152,14 @@ public class Admin extends User {
 
                 while (runHapusRestaurant) {
                     CLS.clearConsole();
-                    AdminMessages.hapusRestoranHeader();
+                    showHapusRestoranHeader();
                     int index = 0;
                     for (Restaurant element : listRestaurant) { //memunculkan seluruh restoran yang ada di list
                         Restaurant restaurantObject = listRestaurant.get(index);
                         restaurantObject.toString();
                         index++;
                     }
-                    AdminMessages.hapusRestoranFooter(); //memasukkan ID resto yang ingin dihapus
+                    showHapusRestoranFooter(); //memasukkan ID resto yang ingin dihapus
                     Messages.inputInstruction();
                     String userInputResto = keyboard.nextLine();
                     if (userInputResto.equals("0")) break;
@@ -171,7 +171,7 @@ public class Admin extends User {
                                 // kalau ketemu, hapusresto
                                 restaurantFound = true;
                                 listRestaurant.remove(index);
-                                AdminMessages.hapusRestoranDone();
+                                showHapusRestoranDone();
                                 runHapusRestaurant = false;
                                 keyboard.nextLine();
                                 break;
@@ -206,9 +206,8 @@ public class Admin extends User {
 
 
     /**
-     * Nested Class for Messages Guide
+     * Methods to Show User's Instructions
      */
-    static class AdminMessages {
         public static void showMenu() {
             System.out.println(" + =============================================================== + ");
             System.out.println("||                         T A P  AND  E A T                       ||");
@@ -223,7 +222,7 @@ public class Admin extends User {
             System.out.println(" + =============================================================== + ");
         }
 
-        public static void lihatRestoranHeader() {
+        public static void showLihatRestoranHeader() {
             System.out.println(" + =============================================================== + ");
             System.out.println("||                          LIHAT RESTORAN                         ||");
             System.out.println("||                            Admin Menu                           ||");
@@ -231,14 +230,14 @@ public class Admin extends User {
             System.out.println("|| ID RESTO |         NAMA RESTORAN         |    ALAMAT RESTORAN   ||");
             System.out.println(" + --------------------------------------------------------------- + ");
         }
-        public static void lihatRestoranFooter() {
+        public static void showLihatRestoranFooter() {
             System.out.println(" + --------------------------------------------------------------- + ");
             System.out.println("||          Lihat menu restoran dengan memasukkan ID restoran      ||");
             System.out.println("||                 Klik [0] untuk kembali ke menu admin            ||");
             System.out.println(" + =============================================================== + ");
         }
 
-        public static void tambahRestoranHeader() {
+        public static void showTambahRestoranHeader() {
             System.out.println(" + =============================================================== + ");
             System.out.println("||                          TAMBAH RESTORAN                        ||");
             System.out.println("||                            Admin Menu                           ||");
@@ -248,7 +247,7 @@ public class Admin extends User {
             System.out.println(" + =============================================================== + ");
         }
 
-        public static void tambahRestoranLagi() {
+        public static void showTambahRestoranLagi() {
             System.out.println(" + --------------------------------------------------------------- + ");
             System.out.println("||                   Restoran berhasil ditambahkan!                ||");
             System.out.println(" + --------------------------------------------------------------- + ");
@@ -258,7 +257,7 @@ public class Admin extends User {
             System.out.println(" + =============================================================== + ");
         }
 
-        public static void hapusRestoranHeader() {
+        public static void showHapusRestoranHeader() {
             System.out.println(" + =============================================================== + ");
             System.out.println("||                          HAPUS RESTORAN                         ||");
             System.out.println("||                            Admin Menu                           ||");
@@ -267,18 +266,18 @@ public class Admin extends User {
             System.out.println(" + --------------------------------------------------------------- + ");
         }
 
-        public static void hapusRestoranFooter() {
+        public static void showHapusRestoranFooter() {
             System.out.println(" + --------------------------------------------------------------- + ");
             System.out.println("||             Hapus restoran dengan memasukkan ID restoran        ||");
             System.out.println("||                 Klik [0] untuk kembali ke menu admin            ||");
             System.out.println(" + =============================================================== + ");
         }
 
-        public static void hapusRestoranDone() {
+        public static void showHapusRestoranDone() {
             System.out.println(" + =============================================================== + ");
             System.out.println("||                      Restoran berhasil dihapus!                 ||");
             System.out.println("||                Tekan ENTER untuk kembali ke menu admin          ||");
             System.out.println(" + =============================================================== + ");
         }
-    }
+
 }

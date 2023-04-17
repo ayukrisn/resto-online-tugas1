@@ -17,7 +17,7 @@ public class Restaurant {
 
 
 
-    // Constractor
+    // Constructor
     public Restaurant() {
 
     }
@@ -58,12 +58,12 @@ public class Restaurant {
 
         while (runAddMenu) {
             CLS.clearConsole();
-            RestaurantMessages.addMenu(); //1. tambah menu makanan 2. tambah menu minuman 0. selesai
+            showAddMenu(); //1. tambah menu makanan 2. tambah menu minuman 0. selesai
             Messages.inputInstruction();
             userInput = keyboard.getMenuChoice(0,2);
             if (userInput == 0) { //memeriksa apakah user sudah menambahkan menu atau belum
                 if(!addMenuDone) { //jika ternyata belum
-                    RestaurantMessages.konfirmasiPembatalanTambahResto(); //1. batalkan, 2. lanjutkan
+                    showKonfirmasiPembatalanTambahResto(); //1. batalkan, 2. lanjutkan
                     Messages.inputInstruction();
                     int userInput2 = keyboard.getMenuChoice(1,2);
                     if(userInput2 == 1) { //jika batal tambah resto, set addMenuDone ke false
@@ -79,7 +79,7 @@ public class Restaurant {
                 }
             } else if (userInput == 1) { //menambahkan menu makanan
                 CLS.clearConsole();
-                RestaurantMessages.addMakananOrMinuman("Makanan");
+                showAddMakananOrMinuman("Makanan");
                 idNotValid = true;
                 while (idNotValid) { //memeriksa apakah ID tidak valid (duplikat atau tidak memenuhi persyaratan)
                     System.out.print("    ID Makanan: ");
@@ -97,12 +97,12 @@ public class Restaurant {
                 keyboard.nextLine();
 
                 addMakanan(tempIdDish, tempNamaDish, tempHargaDish); //menambahkan list makanan
-                RestaurantMessages.addMenuBerhasil(); //memberi pesan penambahan menu berhasil
+                showAddMenuBerhasil(); //memberi pesan penambahan menu berhasil
                 addMenuDone = true;
                 keyboard.nextLine();
             } else if (userInput == 2) { //menambahkan menu minuman
                 CLS.clearConsole();
-                RestaurantMessages.addMakananOrMinuman("Minuman");
+                showAddMakananOrMinuman("Minuman");
                 idNotValid = true;
                 while (idNotValid) { //memeriksa apakah ID tidak valid (duplikat atau tidak memenuhi persyaratan)
                     System.out.print("    ID Minuman: ");
@@ -120,7 +120,7 @@ public class Restaurant {
                 keyboard.nextLine();
 
                 addMinuman(tempIdDish, tempNamaDish, tempHargaDish); //menambahkan list minuman
-                RestaurantMessages.addMenuBerhasil(); //memberi pesan penambahan menu berhasil
+                showAddMenuBerhasil(); //memberi pesan penambahan menu berhasil
                 addMenuDone = true;
                 keyboard.nextLine();
             }
@@ -142,7 +142,7 @@ public class Restaurant {
 
         while (runSeeRestaurantMenu) {
             CLS.clearConsole();
-            RestaurantMessages.pilihMenu(getNama(), getAlamat(),"Kembali"); //1. lihat makanan, 2. lihat minuman, 0. kembali
+            showPilihMenu(getNama(), getAlamat(),"Kembali"); //1. lihat makanan, 2. lihat minuman, 0. kembali
             Messages.inputInstruction();
             int userInput = keyboard.getMenuChoice(0,2);
 
@@ -152,24 +152,24 @@ public class Restaurant {
             } else if (userInput == 1) { //munculkan makanan sesuai list
                 CLS.clearConsole();
                 int index = 0;
-                RestaurantMessages.lihatMakananHeader(getNama(), getAlamat());
+                showLihatMakananHeader(getNama(), getAlamat());
                 for (Dish element : listMakanan) {
                     Dish makananObject = listMakanan.get(index);
                     makananObject.toString();
                     index++;
                 }
-                RestaurantMessages.lihatMakananFooter();
+                showLihatMakananFooter();
                 keyboard.nextLine();
             } else if (userInput == 2) { //munculkan minuman sesuai list
                 CLS.clearConsole();
                 int index = 0;
-                RestaurantMessages.lihatMinumanHeader(getNama(), getAlamat());
+                showLihatMinumanHeader(getNama(), getAlamat());
                 for (Dish element : listMinuman) {
                     Dish minumanObject = listMinuman.get(index);
                     minumanObject.toString();
                     index++;
                 }
-                RestaurantMessages.lihatMinumanFooter();
+                showLihatMinumanFooter();
                 keyboard.nextLine();
             }
         }
@@ -202,13 +202,13 @@ public class Restaurant {
         while (runOrderRestaurantMenu) {
             CLS.clearConsole();
             // Nunjukin pilihan makanan atau minuman
-            RestaurantMessages.pilihMenu(getNama(), getAlamat(), "Selesai memesan"); // 1. makanan, 2. minuman, 0. selesai/batal memesan
+            showPilihMenu(getNama(), getAlamat(), "Selesai memesan"); // 1. makanan, 2. minuman, 0. selesai/batal memesan
             Messages.inputInstruction();
             int userInput = keyboard.getMenuChoice(0,2);
 
             if (userInput == 0) { //periksa apakah user sudah melakukan pemesanan/tidak
                 if (!hasOrdered) { // Belum melakukan order apapun
-                    RestaurantMessages.konfirmasiPembatalanOrder(); //1. batal, 2. tidak
+                    showKonfirmasiPembatalanOrder(); //1. batal, 2. tidak
                     Messages.inputInstruction();
                     int userInput2 = keyboard.getMenuChoice(1,2);
                     if(userInput2 == 1) {
@@ -222,7 +222,7 @@ public class Restaurant {
                     orderObject.showOrders();
                     orderObject.payOrdersFooter();
                     orderObject.payment();
-                    RestaurantMessages.pemesananDone();
+                    showPemesananDone();
                     keyboard.nextLine();
                     break;
                 }
@@ -230,13 +230,13 @@ public class Restaurant {
                 int index = 0;
                 // Nunjukin makanan yang ada
                 CLS.clearConsole();
-                RestaurantMessages.pesanMakananHeader(getNama(), getAlamat());
+                showPesanMakananHeader(getNama(), getAlamat());
                 for (Dish element : listMakanan) { //memunculkan list makanan yang ada
                     Dish makananObject = listMakanan.get(index);
                     makananObject.toString();
                     index++;
                 }
-                RestaurantMessages.pesanMakananFooter();
+                showPesanMakananFooter();
                 Messages.inputInstruction(); //meminta user menginput id makanan yang ingin dipesan
                 userMenuChoice = keyboard.nextLine();
                 // Memeriksa apakah makanan ada atau tidak
@@ -278,13 +278,13 @@ public class Restaurant {
                 int index = 0;
                 // Nunjukin minuman yang ada
                 CLS.clearConsole();
-                RestaurantMessages.pesanMinumanHeader(getNama(), getAlamat());
+                showPesanMinumanHeader(getNama(), getAlamat());
                 for (Dish element : listMinuman) { //memunculkan list minuman yang ada
                     Dish minumanObject = listMinuman.get(index);
                     minumanObject.toString();
                     index++;
                 }
-                RestaurantMessages.pesanMinumanFooter();
+                showPesanMinumanFooter();
                 Messages.inputInstruction(); //meminta user memilih minuman dengan memasukkan id
                 userMenuChoice = keyboard.nextLine();
                 // Memeriksa apakah minuman ada atau tidak
@@ -374,135 +374,136 @@ public class Restaurant {
         return listMinuman;
     }
 
-    static class RestaurantMessages {
-        public static void pilihMenu(String namaResto, String alamatResto, String text) {
-            System.out.println(" + =============================================================== + ");
-            System.out.println("||                            Selamat Datang!                      ||");
-            System.out.printf ("|| > Restoran: %-52s||\n", namaResto);
-            System.out.printf ("|| > Alamat  : %-52s||\n", alamatResto);
-            System.out.println(" + --------------------------------------------------------------- + ");
-            System.out.println("||                  Yuk, pilih makanan dan minumanmu               ||");
-            System.out.println("||                                                                 ||");
-            System.out.println("||   [1] Lihat Makanan                                             ||");
-            System.out.println("||   [2] Lihat Minuman                                             ||");
-            System.out.printf("||   [0] %-58s||\n", text);
-            System.out.println(" + =============================================================== + ");
-        }
-        public static void lihatMakananHeader(String namaResto, String alamatResto) {
-            System.out.println(" + =============================================================== + ");
-            System.out.println("||                        LIHAT MENU RESTORAN                      ||");
-            System.out.printf ("|| > Restoran: %-52s||\n", namaResto);
-            System.out.printf ("|| > Alamat  : %-52s||\n", alamatResto);
-            System.out.println(" + --------------------------------------------------------------- + ");
-            System.out.println("|| ID MENU  |             NAMA MAKANAN             |      HARGA    ||");
-            System.out.println(" + --------------------------------------------------------------- + ");
-        }
-        public static void lihatMakananFooter() {
-            System.out.println(" + --------------------------------------------------------------- + ");
-            System.out.println("||                      Tekan Enter untuk kembali                  ||");
-            System.out.println(" + =============================================================== + ");
-        }
+    /**
+     * Methods to Show User's Instructions
+     * @param namaResto
+     * @param alamatResto
+     * @param text
+     */
 
-        public static void lihatMinumanHeader(String namaResto, String alamatResto) {
-            System.out.println(" + =============================================================== + ");
-            System.out.println("||                        LIHAT MENU RESTORAN                      ||");
-            System.out.printf ("|| > Restoran: %-52s||\n", namaResto);
-            System.out.printf ("|| > Alamat  : %-52s||\n", alamatResto);
-            System.out.println(" + --------------------------------------------------------------- + ");
-            System.out.println("|| ID MENU  |             NAMA MINUMAN             |      HARGA    ||");
-            System.out.println(" + --------------------------------------------------------------- + ");
-        }
-        public static void lihatMinumanFooter() {
-            System.out.println(" + --------------------------------------------------------------- + ");
-            System.out.println("||                      Tekan Enter untuk kembali                  ||");
-            System.out.println(" + =============================================================== + ");
-        }
+    public static void showPilihMenu(String namaResto, String alamatResto, String text) {
+        System.out.println(" + =============================================================== + ");
+        System.out.println("||                            Selamat Datang!                      ||");
+        System.out.printf ("|| > Restoran: %-52s||\n", namaResto);
+        System.out.printf ("|| > Alamat  : %-52s||\n", alamatResto);
+        System.out.println(" + --------------------------------------------------------------- + ");
+        System.out.println("||                  Yuk, pilih makanan dan minumanmu               ||");
+        System.out.println("||                                                                 ||");
+        System.out.println("||   [1] Lihat Makanan                                             ||");
+        System.out.println("||   [2] Lihat Minuman                                             ||");
+        System.out.printf("||   [0] %-58s||\n", text);
+        System.out.println(" + =============================================================== + ");
+    }
+    public static void showLihatMakananHeader(String namaResto, String alamatResto) {
+        System.out.println(" + =============================================================== + ");
+        System.out.println("||                        LIHAT MENU RESTORAN                      ||");
+        System.out.printf ("|| > Restoran: %-52s||\n", namaResto);
+        System.out.printf ("|| > Alamat  : %-52s||\n", alamatResto);
+        System.out.println(" + --------------------------------------------------------------- + ");
+        System.out.println("|| ID MENU  |             NAMA MAKANAN             |      HARGA    ||");
+        System.out.println(" + --------------------------------------------------------------- + ");
+    }
+    public static void showLihatMakananFooter() {
+        System.out.println(" + --------------------------------------------------------------- + ");
+        System.out.println("||                      Tekan Enter untuk kembali                  ||");
+        System.out.println(" + =============================================================== + ");
+    }
 
-        public static void pesanMakananHeader(String namaResto, String alamatResto) {
-            System.out.println(" + =============================================================== + ");
-            System.out.println("||                        PESAN MENU RESTORAN                      ||");
-            System.out.printf ("|| > Restoran: %-52s||\n", namaResto);
-            System.out.printf ("|| > Alamat  : %-52s||\n", alamatResto);
-            System.out.println(" + --------------------------------------------------------------- + ");
-            System.out.println("|| ID MENU  |             NAMA MAKANAN             |      HARGA    ||");
-            System.out.println(" + --------------------------------------------------------------- + ");
-        }
-        public static void pesanMakananFooter() {
-            System.out.println(" + --------------------------------------------------------------- + ");
-            System.out.println("||        Pilih menu yang diinginkan dengan menginput ID Menu      ||");
-            System.out.println("||               Klik [0] untuk kembali ke menu customer           ||");
-            System.out.println(" + =============================================================== + ");
-        }
+    public static void showLihatMinumanHeader(String namaResto, String alamatResto) {
+        System.out.println(" + =============================================================== + ");
+        System.out.println("||                        LIHAT MENU RESTORAN                      ||");
+        System.out.printf ("|| > Restoran: %-52s||\n", namaResto);
+        System.out.printf ("|| > Alamat  : %-52s||\n", alamatResto);
+        System.out.println(" + --------------------------------------------------------------- + ");
+        System.out.println("|| ID MENU  |             NAMA MINUMAN             |      HARGA    ||");
+        System.out.println(" + --------------------------------------------------------------- + ");
+    }
+    public static void showLihatMinumanFooter() {
+        System.out.println(" + --------------------------------------------------------------- + ");
+        System.out.println("||                      Tekan Enter untuk kembali                  ||");
+        System.out.println(" + =============================================================== + ");
+    }
 
-        public static void pesanMinumanHeader(String namaResto, String alamatResto) {
-            System.out.println(" + =============================================================== + ");
-            System.out.println("||                        LIHAT MENU RESTORAN                      ||");
-            System.out.printf ("|| > Restoran: %-52s||\n", namaResto);
-            System.out.printf ("|| > Alamat  : %-52s||\n", alamatResto);
-            System.out.println(" + --------------------------------------------------------------- + ");
-            System.out.println("|| ID MENU  |             NAMA MINUMAN             |      HARGA    ||");
-            System.out.println(" + --------------------------------------------------------------- + ");
-        }
-        public static void pesanMinumanFooter() {
-            System.out.println(" + --------------------------------------------------------------- + ");
-            System.out.println("||        Pilih menu yang diinginkan dengan menginput ID Menu      ||");
-            System.out.println("||               Klik [0] untuk kembali ke menu customer           ||");
-            System.out.println(" + =============================================================== + ");
-        }
+    public static void showPesanMakananHeader(String namaResto, String alamatResto) {
+        System.out.println(" + =============================================================== + ");
+        System.out.println("||                        PESAN MENU RESTORAN                      ||");
+        System.out.printf ("|| > Restoran: %-52s||\n", namaResto);
+        System.out.printf ("|| > Alamat  : %-52s||\n", alamatResto);
+        System.out.println(" + --------------------------------------------------------------- + ");
+        System.out.println("|| ID MENU  |             NAMA MAKANAN             |      HARGA    ||");
+        System.out.println(" + --------------------------------------------------------------- + ");
+    }
+    public static void showPesanMakananFooter() {
+        System.out.println(" + --------------------------------------------------------------- + ");
+        System.out.println("||        Pilih menu yang diinginkan dengan menginput ID Menu      ||");
+        System.out.println("||               Klik [0] untuk kembali ke menu customer           ||");
+        System.out.println(" + =============================================================== + ");
+    }
 
+    public static void showPesanMinumanHeader(String namaResto, String alamatResto) {
+        System.out.println(" + =============================================================== + ");
+        System.out.println("||                        LIHAT MENU RESTORAN                      ||");
+        System.out.printf ("|| > Restoran: %-52s||\n", namaResto);
+        System.out.printf ("|| > Alamat  : %-52s||\n", alamatResto);
+        System.out.println(" + --------------------------------------------------------------- + ");
+        System.out.println("|| ID MENU  |             NAMA MINUMAN             |      HARGA    ||");
+        System.out.println(" + --------------------------------------------------------------- + ");
+    }
+    public static void showPesanMinumanFooter() {
+        System.out.println(" + --------------------------------------------------------------- + ");
+        System.out.println("||        Pilih menu yang diinginkan dengan menginput ID Menu      ||");
+        System.out.println("||               Klik [0] untuk kembali ke menu customer           ||");
+        System.out.println(" + =============================================================== + ");
+    }
 
+    public static void showAddMenu() {
+        System.out.println(" + =============================================================== + ");
+        System.out.println("||                       TAMBAH RESTORAN: MENU                     ||");
+        System.out.println("||                            Admin Menu                           ||");
+        System.out.println(" + --------------------------------------------------------------- + ");
+        System.out.println("||                 Pilih bagian yang ingin ditambah                ||");
+        System.out.println("||                                                                 ||");
+        System.out.println("||      [1] Makanan           [2] Minuman         [0] Selesai      ||");
+        System.out.println(" + =============================================================== + ");
+    }
 
+    public static void showAddMakananOrMinuman(String menu) {
+        System.out.println(" + =============================================================== + ");
+        System.out.printf("||                        TAMBAH RESTORAN: %7s                 ||\n", menu.toUpperCase());
+        System.out.println("||                            Admin Menu                           ||");
+        System.out.println(" + --------------------------------------------------------------- + ");
+        System.out.printf("||  Mohon masukkan %7s baru dengan informasi sebagai berikut. ||\n", menu);
+        System.out.printf("||          < ID %7s, Nama %7s, Harga %7s >            ||\n", menu, menu, menu);
+        System.out.println(" + =============================================================== + ");
+    }
 
-        public static void addMenu() {
-            System.out.println(" + =============================================================== + ");
-            System.out.println("||                       TAMBAH RESTORAN: MENU                     ||");
-            System.out.println("||                            Admin Menu                           ||");
-            System.out.println(" + --------------------------------------------------------------- + ");
-            System.out.println("||                 Pilih bagian yang ingin ditambah                ||");
-            System.out.println("||                                                                 ||");
-            System.out.println("||      [1] Makanan           [2] Minuman         [0] Selesai      ||");
-            System.out.println(" + =============================================================== + ");
-        }
+    public static void showAddMenuBerhasil() {
+        System.out.println(" + --------------------------------------------------------------- + ");
+        System.out.println("||                      Menu berhasil ditambahkan!                 ||");
+        System.out.println(" + =============================================================== + ");
+    }
 
-        public static void addMakananOrMinuman(String menu) {
-            System.out.println(" + =============================================================== + ");
-            System.out.printf("||                        TAMBAH RESTORAN: %7s                 ||\n", menu.toUpperCase());
-            System.out.println("||                            Admin Menu                           ||");
-            System.out.println(" + --------------------------------------------------------------- + ");
-            System.out.printf("||  Mohon masukkan %7s baru dengan informasi sebagai berikut. ||\n", menu);
-            System.out.printf("||          < ID %7s, Nama %7s, Harga %7s >           ||\n", menu, menu, menu);
-            System.out.println(" + =============================================================== + ");
-        }
+    public static void showKonfirmasiPembatalanTambahResto() {
+        System.out.println(" + =============================================================== + ");
+        System.out.println("||                 Anda belum menambahkan menu apapun.             ||");
+        System.out.println("||                Ingin membatalkan penambahan restoran?           ||");
+        System.out.println("||                                                                 ||");
+        System.out.println("||                 [1] Ya                   [2] Tidak              ||");
+        System.out.println(" + =============================================================== + ");
+    }
 
-        public static void addMenuBerhasil() {
-            System.out.println(" + --------------------------------------------------------------- + ");
-            System.out.println("||                      Menu berhasil ditambahkan!                 ||");
-            System.out.println(" + =============================================================== + ");
-        }
+    public static void showKonfirmasiPembatalanOrder() {
+        System.out.println(" + =============================================================== + ");
+        System.out.println("||           Anda belum memesan apapun. Ingin membatalkan?         ||");
+        System.out.println("||                                                                 ||");
+        System.out.println("||                 [1] Ya                   [2] Tidak              ||");
+        System.out.println(" + =============================================================== + ");
+    }
 
-        public static void konfirmasiPembatalanTambahResto() {
-            System.out.println(" + =============================================================== + ");
-            System.out.println("||                 Anda belum menambahkan menu apapun.             ||");
-            System.out.println("||                Ingin membatalkan penambahan restoran?           ||");
-            System.out.println("||                                                                 ||");
-            System.out.println("||                 [1] Ya                   [2] Tidak              ||");
-            System.out.println(" + =============================================================== + ");
-        }
-
-        public static void konfirmasiPembatalanOrder() {
-            System.out.println(" + =============================================================== + ");
-            System.out.println("||           Anda belum memesan apapun. Ingin membatalkan?         ||");
-            System.out.println("||                                                                 ||");
-            System.out.println("||                 [1] Ya                   [2] Tidak              ||");
-            System.out.println(" + =============================================================== + ");
-        }
-
-        public static void pemesananDone() {
-            System.out.println(" + =============================================================== + ");
-            System.out.println("||                   Pesanan Anda sudah ditambahkan!               ||");
-            System.out.println("||                      Tekan Enter untuk kembali                  ||");
-            System.out.println(" + =============================================================== + ");
-        }
-
+    public static void showPemesananDone() {
+        System.out.println(" + =============================================================== + ");
+        System.out.println("||                   Pesanan Anda sudah ditambahkan!               ||");
+        System.out.println("||                      Tekan Enter untuk kembali                  ||");
+        System.out.println(" + =============================================================== + ");
     }
 }

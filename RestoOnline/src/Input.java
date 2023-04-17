@@ -80,7 +80,7 @@ public class Input {
 
     /**
      * Method validationDouble()
-     * Menerima dan memvalidasi input double
+     * Menerima dan memvalidasi apakah input benar double atau tidak
      * @return valid double
      */
     private double validationDouble() {
@@ -177,15 +177,15 @@ public class Input {
     /**
      * Method isIDDishSame
      * Digunakan untuk memeriksa apakah sudah ada ID makanan yang mirip atau tidak
-     * @param dish
+     * @param listDish
      * @param id
      * @return
      */
-    public boolean isIDDishSame(ArrayList<Dish> dish, String id) {
+    public boolean isIDDishSame(ArrayList<Dish> listDish, String id) {
         boolean isIDSame = false;
         int index = 0;
 
-        for(Dish element : dish) {
+        for(Dish element : listDish) {
             if(element.getIdDish().equals(id)) isIDSame = true;
         }
         return isIDSame;
@@ -228,9 +228,5 @@ public class Input {
      */
     public String nextLine() {
         return input.nextLine();
-    }
-
-    public String next() {
-        return input.next();
     }
 }

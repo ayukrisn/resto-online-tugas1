@@ -38,22 +38,30 @@ public class Main {
         /**
          * Inisiasi data restoran untuk testing
          */
-        listRestoran.add(new Restaurant("RESTO1", "Warung Ikan Bakar", "Jln Kampus Unud"));
-        Restaurant restoranTest1 = listRestoran.get(0);
-        restoranTest1.getListMakanan().add(new Dish("MAKAN1", "Ikan Gurame Bakar", 40000));
-        restoranTest1.getListMakanan().add(new Dish("MAKAN2", "Ikan Tongkol Bakar", 30000));
-        restoranTest1.getListMakanan().add(new Dish("MAKAN3", "Nasi Putih", 4000));
-        restoranTest1.getListMinuman().add(new Dish("MINUM1", "Es Teh Manis", 5000));
-        restoranTest1.getListMinuman().add(new Dish("MINUM2", "Es Jeruk Manis", 8000));
-        listRestoran.add(new Restaurant("RESTO2", "Resto Siliwangi", "Jln Tukad Pancing"));
-        Restaurant restoranTest2 = listRestoran.get(1);
-        restoranTest2.getListMakanan().add(new Dish("MAKAN1", "Nasi Goreng", 20000));
-        restoranTest2.getListMakanan().add(new Dish("MAKAN2", "Fuyung Hai", 15000));
-        restoranTest2.getListMakanan().add(new Dish("MAKAN3", "Capcay", 12000));
-        restoranTest2.getListMakanan().add(new Dish("MAKAN4", "Kwetiau Goreng", 18000));
-        restoranTest2.getListMinuman().add(new Dish("MINUM1", "Es Gula", 3000));
-        restoranTest2.getListMinuman().add(new Dish("MINUM2", "Es Susu", 5000));
-        restoranTest2.getListMinuman().add(new Dish("MINUM3", "Es Soda Gembira", 7000));
+//        listRestoran.add(new Restaurant("RESTO1", "Warung Ikan Bakar", "Jln Kampus Unud"));
+//        Restaurant restoranTest1 = listRestoran.get(0);
+//        restoranTest1.getListMakanan().add(new Dish("MAKAN1", "Ikan Gurame Bakar", 40000));
+//        restoranTest1.getListMakanan().add(new Dish("MAKAN2", "Ikan Tongkol Bakar", 30000));
+//        restoranTest1.getListMakanan().add(new Dish("MAKAN3", "Nasi Putih", 4000));
+//        restoranTest1.getListMinuman().add(new Dish("MINUM1", "Es Teh Manis", 5000));
+//        restoranTest1.getListMinuman().add(new Dish("MINUM2", "Es Jeruk Manis", 8000));
+//        listRestoran.add(new Restaurant("RESTO2", "Resto Siliwangi", "Jln Tukad Pancing"));
+//        Restaurant restoranTest2 = listRestoran.get(1);
+//        restoranTest2.getListMakanan().add(new Dish("MAKAN1", "Nasi Goreng", 20000));
+//        restoranTest2.getListMakanan().add(new Dish("MAKAN2", "Fuyung Hai", 15000));
+//        restoranTest2.getListMakanan().add(new Dish("MAKAN3", "Capcay", 12000));
+//        restoranTest2.getListMakanan().add(new Dish("MAKAN4", "Kwetiau Goreng", 18000));
+//        restoranTest2.getListMinuman().add(new Dish("MINUM1", "Es Gula", 3000));
+//        restoranTest2.getListMinuman().add(new Dish("MINUM2", "Es Susu", 5000));
+//        restoranTest2.getListMinuman().add(new Dish("MINUM3", "Es Soda Gembira", 7000));
+//        listRestoran.add(new Restaurant("RESTO3", "Warner & Spencer", "Jln PB Sudirman"));
+//        Restaurant restoranTest3 = listRestoran.get(2);
+//        restoranTest3.getListMakanan().add(new Dish("MAKAN1", "Ayam Bakar", 12000));
+//        restoranTest3.getListMakanan().add(new Dish("MAKAN2", "Ayam Geprek", 15000));
+//        restoranTest3.getListMakanan().add(new Dish("MAKAN3", "Mie Goreng Telur", 10000));
+//        restoranTest3.getListMinuman().add(new Dish("MINUM1", "Es Teh", 5000));
+//        restoranTest3.getListMinuman().add(new Dish("MINUM2", "Es Kopi", 8000));
+//        restoranTest3.getListMinuman().add(new Dish("MINUM3", "Es Jeruk", 5000));
 
         /**
          * Kode utama untuk melakukan run pada program1
